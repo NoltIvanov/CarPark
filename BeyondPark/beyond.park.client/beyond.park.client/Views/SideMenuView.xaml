@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<slideOverKit:SlideMenuView
+    x:Class="beyond.park.client.Views.SideMenuView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:pancakeview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:slideOverKit="clr-namespace:SlideOverKit;assembly=SlideOverKit"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    BackgroundColor="Transparent"
+    BackgroundViewColor="#59010101"
+    IsFullScreen="True"
+    MenuOrientations="LeftToRight"
+    WidthRequest="{OnIdiom Tablet=400,
+                           Default=300}">
+
+    <slideOverKit:SlideMenuView.Resources>
+        <OnPlatform x:Key="infoPadding" x:TypeArguments="Thickness">
+            <On Platform="iOS">
+                <OnIdiom
+                    x:TypeArguments="Thickness"
+                    Phone="20,40,0,0"
+                    Tablet="0,0,0,0" />
+            </On>
+            <On Platform="Android">
+                <OnIdiom
+                    x:TypeArguments="Thickness"
+                    Phone="20,0,0,0"
+                    Tablet="0,0,0,0" />
+            </On>
+        </OnPlatform>
+
+        <Style x:Key="MenuLabelStyle" TargetType="{x:Type Label}">
+            <Setter Property="FontFamily" Value="ModelicaBold" />
+            <Setter Property="FontSize" Value="{OnPlatform iOS={StaticResource BaseFontSize}, Android={StaticResource MidMediumSize}}" />
+            <Setter Property="TextColor" Value="{StaticResource GrayColor}" />
+            <Setter Property="Margin" Value="0,0" />
+            <Setter Property="HorizontalOptions" Value="Start" />
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+    </slideOverKit:SlideMenuView.Resources>
+
+    <Grid BackgroundColor="{StaticResource LightBlueColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <!--  BACKGROUND IMAGE  -->
+        <ffimageloadingsvg:SvgCachedImage
+            Grid.RowSpan="3"
+            HeightRequest="200"
+            HorizontalOptions="Start"
+            Source="resource://beyond.park.client.Resources.Images.ic_logo_transparent.svg"
+            VerticalOptions="End" />
+
+        <!--  USER INFO  -->
+        <ContentView
+            Padding="{StaticResource infoPadding}"
+            HeightRequest="120"
+            VerticalOptions="End">
+            <Grid ColumnDefinitions="auto,*" ColumnSpacing="20">
+                <pancakeview:PancakeView
+                    BackgroundColor="AliceBlue"
+                    CornerRadius="20"
+                    VerticalOptions="Center">
+
+                    <ffimageloadingsvg:SvgCachedImage
+                        HeightRequest="40"
+                        HorizontalOptions="Center"
+                        Source="resource://beyond.park.client.Resources.Images.AV.jpg"
+                        VerticalOptions="Center" />
+                </pancakeview:PancakeView>
+
+                <Label
+                    Grid.Column="1"
+                    FontFamily="ModelicaExtraBold"
+                    Style="{StaticResource MenuLabelStyle}"
+                    Text="Earl E Bird"
+                    TextColor="{StaticResource BlueColor}" />
+            </Grid>
+        </ContentView>
+        <!--  MENU  -->
+        <ScrollView Grid.Row="1">
+            <pancakeview:PancakeView>
+                <FlexLayout Direction="Column">
+                    <!--  PERSONAL DETAILS  -->
+                    <xct:Expander CollapseAnimationEasing="SpringOut" ExpandAnimationEasing="SpringIn">
+                        <xct:Expander.Header>
+                            <ContentView
+                                Padding="20,0,0,0"
+                                BackgroundColor="{StaticResource WhiteColor}"
+                                HeightRequest="60"
+                                VerticalOptions="Center">
+                                <ContentView.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding}" NumberOfTapsRequired="1" />
+                                </ContentView.GestureRecognizers>
+                                <Grid ColumnDefinitions="auto,*" ColumnSpacing="20">
+                                    <ffimageloadingsvg:SvgCachedImage
+                                        HeightRequest="35"
+                                        HorizontalOptions="Center"
+                                        Source="resource://beyond.park.client.Resources.Images.ic_user_blue.svg"
+                                        VerticalOptions="Center" />
+                                    <Label
+                                        Grid.Column="1"
+                                        Style="{StaticResource MenuLabelStyle}"
+                                        Text="Personal Details" />
+                                </Grid>
+                            </ContentView>
+                        </xct:Expander.Header>
+
+                        <Grid BackgroundColor="#E9F6FB">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <BoxView
+                                HeightRequest="1"
+                                VerticalOptions="Start"
+                                Color="{StaticResource GrayColor}" />
+
+                            <BoxView
+                                Grid.RowSpan="3"
+                                HeightRequest="1"
+                                VerticalOptions="End"
+                                Color="{StaticResource GrayColor}" />
+
+                            <Grid
+                                Margin="0,10"
+                                Padding="75,0,0,0"
+                                ColumnDefinitions="auto,*"
+                                ColumnSpacing="20"
+                                RowDefinitions="auto,auto">
+                                <ffimageloadingsvg:SvgCachedImage
+                                    Grid.RowSpan="2"
+                                    Grid.Column="1"
+                                    Margin="0,0,20,0"
+                                    HeightRequest="17"
+                                    HorizontalOptions="End"
+                                    Source="resource://beyond.park.client.Resources.Images.ic_edit_simple.svg"
+                                    VerticalOptions="Center" />
+                                <Label
+                                    Grid.Column="0"
+                                    Style="{StaticResource MenuLabelStyle}"
+                                    Text="Name"
+                                    TextColor="{StaticResource BlueColor}" />
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    FontFamily="ModelicaMedium"
+                                    Style="{StaticResource MenuLabelStyle}"
+                                    Text="Erl E Bird"
+                                    TextColor="#6c6c6c" />
+                            </Grid>
+
+                            <Grid
+                                Grid.Row="1"
+                                Margin="0,10"
+                                Padding="75,0,0,0"
+                                ColumnDefinitions="auto,*"
+                                ColumnSpacing="20"
+                                RowDefinitions="auto,auto">
+
+                                <Label
+                                    Grid.Column="0"
+                                    Style="{StaticResource MenuLabelStyle}"
+                                    Text="Phone"
+                                    TextColor="{StaticResource BlueColor}" />
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    FontFamily="ModelicaMedium"
+                                    Style="{StaticResource MenuLabelStyle}"
+                                    Text="0355 562 232" />
+                            </Grid>
+
+                            <Grid
+                                Grid.Row="2"
+                                Margin="0,10"
+                                Padding="75,0,0,0"
+                                ColumnDefinitions="auto,*"
+                                ColumnSpacing="20"
+                                RowDefinitions="auto,auto">
+
+                                <Label
+                                    Grid.Column="0"
+                                    Style="{StaticResource MenuLabelStyle}"
+                                    Text="Password"
+                                    TextColor="{StaticResource BlueColor}" />
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    FontFamily="ModelicaMedium"
+                                    Style="{StaticResource MenuLabelStyle}"
+                                    Text="********" />
+                            </Grid>
+                        </Grid>
+                    </xct:Expander>
+                    <!--  VEHICLE INFORMATION  -->
+                    <ContentView
+                        Padding="20,0,0,0"
+                        BackgroundColor="{StaticResource WhiteColor}"
+                        HeightRequest="60"
+                        VerticalOptions="Center">
+                        <ContentView.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding}" NumberOfTapsRequired="1" />
+                        </ContentView.GestureRecognizers>
+                        <Grid ColumnDefinitions="auto,*" ColumnSpacing="20">
+                            <ffimageloadingsvg:SvgCachedImage
+                                HeightRequest="35"
+                                HorizontalOptions="Center"
+                                Source="resource://beyond.park.client.Resources.Images.ic_vehicle_blue.svg"
+                                VerticalOptions="Center" />
+                            <Label
+                                Grid.Column="1"
+                                Style="{StaticResource MenuLabelStyle}"
+                                Text="Vehicle Information" />
+                        </Grid>
+                    </ContentView>
+                    <!--  PAYMENT INFORMATION  -->
+                    <ContentView
+                        Padding="20,0,0,0"
+                        BackgroundColor="{StaticResource WhiteColor}"
+                        HeightRequest="60"
+                        VerticalOptions="Center">
+                        <ContentView.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding}" NumberOfTapsRequired="1" />
+                        </ContentView.GestureRecognizers>
+                        <Grid ColumnDefinitions="auto,*" ColumnSpacing="20">
+                            <ffimageloadingsvg:SvgCachedImage
+                                HeightRequest="35"
+                                HorizontalOptions="Center"
+                                Source="resource://beyond.park.client.Resources.Images.ic_card_blue.svg"
+                                VerticalOptions="Center" />
+                            <Label
+                                Grid.Column="1"
+                                Style="{StaticResource MenuLabelStyle}"
+                                Text="Payment Information" />
+                        </Grid>
+                    </ContentView>
+                    <!--  SUPPORT & FEEDBACK  -->
+                    <ContentView
+                        Padding="20,0,0,0"
+                        BackgroundColor="{StaticResource WhiteColor}"
+                        HeightRequest="60"
+                        VerticalOptions="Center">
+                        <ContentView.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding}" NumberOfTapsRequired="1" />
+                        </ContentView.GestureRecognizers>
+                        <Grid ColumnDefinitions="auto,*" ColumnSpacing="20">
+                            <ffimageloadingsvg:SvgCachedImage
+                                HeightRequest="35"
+                                HorizontalOptions="Center"
+                                Source="resource://beyond.park.client.Resources.Images.ic_feedback_blue.svg"
+                                VerticalOptions="Center" />
+                            <Label
+                                Grid.Column="1"
+                                Style="{StaticResource MenuLabelStyle}"
+                                Text="{Binding SupportTitle, Mode=OneTime}" />
+                        </Grid>
+                    </ContentView>
+                    <!--  PRIVACY & SAFETY  -->
+                    <ContentView
+                        Padding="20,0,0,0"
+                        BackgroundColor="{StaticResource WhiteColor}"
+                        HeightRequest="60"
+                        VerticalOptions="Center">
+                        <ContentView.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding}" NumberOfTapsRequired="1" />
+                        </ContentView.GestureRecognizers>
+                        <Grid ColumnDefinitions="auto,*" ColumnSpacing="20">
+                            <ffimageloadingsvg:SvgCachedImage
+                                HeightRequest="35"
+                                HorizontalOptions="Center"
+                                Source="resource://beyond.park.client.Resources.Images.ic_privacy_blue.svg"
+                                VerticalOptions="Center" />
+                            <Label
+                                Grid.Column="1"
+                                Style="{StaticResource MenuLabelStyle}"
+                                Text="{Binding PrivacyTitle, Mode=OneTime}" />
+                        </Grid>
+                    </ContentView>
+                    <!--  TOUR  -->
+                    <ContentView
+                        Padding="20,0,0,0"
+                        BackgroundColor="{StaticResource WhiteColor}"
+                        HeightRequest="60"
+                        VerticalOptions="Center">
+                        <ContentView.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding}" NumberOfTapsRequired="1" />
+                        </ContentView.GestureRecognizers>
+                        <Grid ColumnDefinitions="auto,*" ColumnSpacing="20">
+                            <ffimageloadingsvg:SvgCachedImage
+                                HeightRequest="35"
+                                HorizontalOptions="Center"
+                                Source="resource://beyond.park.client.Resources.Images.ic_tour_blue.svg"
+                                VerticalOptions="Center" />
+                            <Label
+                                Grid.Column="1"
+                                Style="{StaticResource MenuLabelStyle}"
+                                Text="Tour" />
+                        </Grid>
+                    </ContentView>
+                </FlexLayout>
+            </pancakeview:PancakeView>
+        </ScrollView>
+        <!--  LOG OUT  -->
+        <ContentView
+            Grid.Row="2"
+            Padding="20,0,0,0"
+            HeightRequest="60"
+            VerticalOptions="End">
+            <ContentView.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding LogOutCommand}" NumberOfTapsRequired="1" />
+            </ContentView.GestureRecognizers>
+            <Label Style="{StaticResource MenuLabelStyle}" Text="Log Out" />
+        </ContentView>
+    </Grid>
+
+</slideOverKit:SlideMenuView>

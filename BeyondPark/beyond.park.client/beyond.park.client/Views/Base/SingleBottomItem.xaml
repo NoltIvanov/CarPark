@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<base:BottomItemViewBase
+    x:Class="beyond.park.client.Views.Base.SingleBottomItem"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:base="clr-namespace:beyond.park.client.Views.Base"
+    xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    BackgroundColor="#f8f8f8"
+    HeightRequest="60">
+
+    <Grid x:Name="_rootContainer_Grid" RowSpacing="0">
+
+        <ffimageloadingsvg:SvgCachedImage
+            x:Name="_icon_CachedImage"
+            HeightRequest="22"
+            HorizontalOptions="Center"
+            Source="{Binding TabIcon}"
+            TranslationY="-5"
+            VerticalOptions="Center"
+            WidthRequest="22" />
+
+        <Label
+            FontSize="{StaticResource LittleSize}"
+            HorizontalOptions="Center"
+            Text="{Binding TabName}"
+            TranslationY="-5"
+            VerticalOptions="End" />
+    </Grid>
+</base:BottomItemViewBase>

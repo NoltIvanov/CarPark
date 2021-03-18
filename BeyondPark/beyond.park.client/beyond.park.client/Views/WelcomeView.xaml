@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<base:ContentPageBaseView
+    x:Class="beyond.park.client.Views.WelcomeView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:base="clr-namespace:beyond.park.client.Views.Base"
+    xmlns:dependency="clr-namespace:beyond.park.client.ViewModels.Base"
+    xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+    xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:magic="clr-namespace:MagicGradients;assembly=MagicGradients"
+    dependency:DependencyLocator.AutoWireViewModel="True"
+    BackgroundColor="{StaticResource WhiteColor}">
+
+    <base:ContentPageBaseView.Resources>
+        <OnPlatform x:Key="logoMargin" x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0,80,0,0" />
+            <On Platform="Android" Value="0,40,0,0" />
+        </OnPlatform>
+
+        <OnPlatform x:Key="buttonMargin" x:TypeArguments="Thickness">
+            <On Platform="iOS" Value="0,0,0,26" />
+            <On Platform="Android" Value="0,0,0,15" />
+        </OnPlatform>
+    </base:ContentPageBaseView.Resources>
+
+    <base:ContentPageBaseView.MainContent>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!--  BACKGROUND IMAGE  -->
+            <ffimageloadingsvg:SvgCachedImage
+                x:Name="backgroundImage"
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Aspect="AspectFill"
+                Source="resource://beyond.park.client.Resources.Images.main_background.png"
+                TranslationY="0" />
+
+            <!--  DESCRIPTION  -->
+            <Label
+                FontSize="{OnPlatform Android={StaticResource BigSize},
+                                      iOS={StaticResource BiggestSize}}"
+                HorizontalTextAlignment="Center"
+                LineHeight="1.23"
+                TextColor="{StaticResource GrayColor}"
+                VerticalOptions="Center">
+                <Label.Text>
+                    Smart, seamless,&#13;&#10;stress-free parking
+                </Label.Text>
+            </Label>
+
+            <!--  BOTTOM ACTIONS  -->
+            <StackLayout
+                Grid.RowSpan="2"
+                Margin="0,0,0,20"
+                VerticalOptions="End">
+
+                <Button
+                    Margin="{StaticResource buttonMargin}"
+                    Command="{Binding OpenGuideCommand}"
+                    Style="{StaticResource ButtonStyle}"
+                    Text="Take the Tour" />
+
+                <Label
+                    FontSize="{OnPlatform Android={StaticResource LittleSize},
+                                          iOS={StaticResource BaseFontSize}}"
+                    HorizontalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="I want to get started and use Beyond Park"
+                    TextColor="{StaticResource GrayColor}"
+                    VerticalOptions="Start">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding UnregisterInCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label
+                    HorizontalOptions="CenterAndExpand"
+                    LineHeight="1.36"
+                    VerticalOptions="Start">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span
+                                FontFamily="ModelicaMedium"
+                                FontSize="{OnPlatform Android={StaticResource LittleSize},
+                                                      iOS={StaticResource BaseFontSize}}"
+                                Text="have an account?"
+                                TextColor="{StaticResource GrayColor}">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SignInCommand}" />
+                                </Span.GestureRecognizers>
+                            </Span>
+                            <Span
+                                FontFamily="ModelicaMedium"
+                                FontSize="{OnPlatform Android={StaticResource LittleSize},
+                                                      iOS={StaticResource BaseFontSize}}"
+                                Text=" Login"
+                                TextColor="{StaticResource GrayColor}"
+                                TextDecorations="Underline">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SignInCommand}" />
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+            </StackLayout>
+        </Grid>
+    </base:ContentPageBaseView.MainContent>
+</base:ContentPageBaseView>

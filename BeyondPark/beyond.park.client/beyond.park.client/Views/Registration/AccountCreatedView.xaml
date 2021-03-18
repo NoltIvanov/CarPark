@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<base:ContentPageBaseView
+    x:Class="beyond.park.client.Views.Registration.AccountCreatedView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:base="clr-namespace:beyond.park.client.Views.Base"
+    xmlns:behaviors="clr-namespace:beyond.park.client.Behaviors"
+    xmlns:controls="clr-namespace:beyond.park.client.Controls"
+    xmlns:dependency="clr-namespace:beyond.park.client.ViewModels.Base"
+    xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+    xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    dependency:DependencyLocator.AutoWireViewModel="True"
+    BackgroundColor="{StaticResource WhiteColor}">
+
+    <base:ContentPageBaseView.Resources>
+        <OnPlatform x:Key="contentPadding" x:TypeArguments="Thickness">
+            <On Platform="iOS">
+                <OnIdiom
+                    x:TypeArguments="Thickness"
+                    Phone="0,40,0,0"
+                    Tablet="0,40,0,0" />
+            </On>
+            <On Platform="Android">
+                <OnIdiom
+                    x:TypeArguments="Thickness"
+                    Phone="0,16,0,0"
+                    Tablet="0,16,0,0" />
+            </On>
+        </OnPlatform>
+    </base:ContentPageBaseView.Resources>
+
+    <base:ContentPageBaseView.MainContent>
+        <Grid
+            Padding="{StaticResource contentPadding}"
+            BackgroundColor="Transparent"
+            VerticalOptions="Fill">
+
+            <!--  BACKGROUND IMAGE  -->
+            <ffimageloadingsvg:SvgCachedImage
+                Aspect="AspectFill"
+                Source="resource://beyond.park.client.Resources.Images.ic_blue_background.svg"
+                TranslationY="0"
+                VerticalOptions="End" />
+
+            <ffimageloadingsvg:SvgCachedImage
+                Aspect="AspectFit"
+                HeightRequest="{OnPlatform Android=380,
+                                           iOS=330}"
+                Source="resource://beyond.park.client.Resources.Images.ic_confirmation_background.png"
+                TranslationY="{OnPlatform Android=-40,
+                                          iOS=0}"
+                VerticalOptions="Start" />
+            <!--  LOGO  -->
+            <Grid BackgroundColor="Transparent" RowSpacing="17">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{OnPlatform Android=50, iOS=45}" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <ffimageloadingsvg:SvgCachedImage
+                    HeightRequest="40"
+                    HorizontalOptions="Center"
+                    Source="resource://beyond.park.client.Resources.Images.ic_logo_blue.svg"
+                    TranslationY="0"
+                    VerticalOptions="Start"
+                    WidthRequest="40" />
+
+
+                <!--  CLOSE BUTTON  -->
+                <Grid
+                    Grid.Row="0"
+                    Padding="0,0"
+                    BackgroundColor="Transparent">
+                    <ContentView
+                        Padding="16,0"
+                        HorizontalOptions="End"
+                        IsVisible="true"
+                        VerticalOptions="Fill">
+                        <ContentView.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding CloseCommand}" />
+                        </ContentView.GestureRecognizers>
+                        <ffimageloadingsvg:SvgCachedImage
+                            HeightRequest="14"
+                            HorizontalOptions="End"
+                            Source="resource://beyond.park.client.Resources.Images.ic_close.svg"
+                            TranslationY="0"
+                            VerticalOptions="Start"
+                            WidthRequest="14" />
+                    </ContentView>
+                </Grid>
+            </Grid>
+
+            <!--  TITLE  -->
+            <StackLayout
+                Margin="0,0,0,17"
+                BackgroundColor="Transparent"
+                Spacing="{OnPlatform Android=15,
+                                     iOS=35}"
+                VerticalOptions="End">
+
+                <StackLayout
+                    Padding="0,5,0,0"
+                    BackgroundColor="Transparent"
+                    Spacing="{OnPlatform Android=10,
+                                         iOS=10}"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        Padding="40,0"
+                        FontFamily="ModelicaBold"
+                        FontSize="25"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        LineHeight="{OnPlatform Android=1.0,
+                                                iOS=1.2}"
+                        Text="Awesome to have you parking with us!"
+                        TextColor="{StaticResource BlueColor}"
+                        VerticalOptions="Start" />
+                    <Label
+                        Margin="30,0"
+                        FontFamily="ModelicaMedium"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Start"
+                        LineHeight="{OnPlatform Android=1.15,
+                                                iOS=1.4}"
+                        Text="We're all ready to go, and we hope that you will really love using Beyond Park. We've sent an email to you confirming your details with us."
+                        TextColor="{StaticResource GrayColor}"
+                        VerticalOptions="StartAndExpand" />
+                </StackLayout>
+
+                <Grid
+                    BackgroundColor="Transparent"
+                    RowSpacing="{OnPlatform Android=14,
+                                            iOS=20}"
+                    VerticalOptions="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+
+                    <Button
+                        Command="{Binding ContinueCommand}"
+                        Style="{StaticResource ButtonStyle}"
+                        Text="Continue"
+                        WidthRequest="180" />
+
+                    <Label
+                        Grid.Row="1"
+                        FontFamily="ModelicaMedium"
+                        FontSize="{OnPlatform Android={StaticResource MidMediumSize},
+                                              iOS={StaticResource BaseFontSize}}"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="Didn't get the confirmation? Send again"
+                        TextColor="{StaticResource GrayColor}"
+                        VerticalOptions="End" />
+                </Grid>
+            </StackLayout>
+
+
+        </Grid>
+
+        <!--<Grid
+            Padding="{StaticResource contentPadding}"
+            BackgroundColor="{StaticResource WhiteColor}"
+            RowSpacing="{OnPlatform Android=5,
+                                    iOS=10}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="0.9*" />
+            </Grid.RowDefinitions>
+
+        -->
+        <!--  BACKGROUND IMAGE  -->
+        <!--
+            <ffimageloadingsvg:SvgCachedImage
+                x:Name="backgroundImage"
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Aspect="AspectFill"
+                Source="resource://beyond.park.client.Resources.Images.ic_blue_background.svg"
+                TranslationY="0"
+                VerticalOptions="End" />
+
+            <ffimageloadingsvg:SvgCachedImage
+                Grid.Row="0"
+                Aspect="AspectFill"
+                Source="resource://beyond.park.client.Resources.Images.ic_confirmation_background.png"
+                TranslationY="0" />
+
+            <Grid
+                Grid.Row="0"
+                BackgroundColor="Transparent"
+                RowSpacing="17">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{OnPlatform Android=50, iOS=45}" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <ffimageloadingsvg:SvgCachedImage
+                    HeightRequest="40"
+                    HorizontalOptions="Center"
+                    Source="resource://beyond.park.client.Resources.Images.ic_logo_blue.svg"
+                    TranslationY="0"
+                    VerticalOptions="Start"
+                    WidthRequest="40" />
+
+        -->
+        <!--  CLOSE BUTTON  -->
+        <!--
+                <Grid
+                    Grid.Row="0"
+                    Padding="0,0"
+                    BackgroundColor="Transparent">
+                    <ContentView
+                        Padding="16,0"
+                        HorizontalOptions="End"
+                        IsVisible="true"
+                        VerticalOptions="Fill">
+                        <ContentView.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding CloseCommand}" />
+                        </ContentView.GestureRecognizers>
+                        <ffimageloadingsvg:SvgCachedImage
+                            HeightRequest="14"
+                            HorizontalOptions="End"
+                            Source="resource://beyond.park.client.Resources.Images.ic_close.svg"
+                            TranslationY="0"
+                            VerticalOptions="Start"
+                            WidthRequest="14" />
+                    </ContentView>
+                </Grid>
+            </Grid>
+
+            <StackLayout
+                Grid.Row="1"
+                Margin="0,0,0,17"
+                BackgroundColor="Transparent"
+                Spacing="0">
+
+                <StackLayout
+                    Padding="0,5,0,0"
+                    BackgroundColor="Transparent"
+                    Spacing="{OnPlatform Android=4,
+                                         iOS=10}"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        Padding="40,0"
+                        FontFamily="ModelicaBold"
+                        FontSize="25"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        LineHeight="{OnPlatform Android=1.0,
+                                                iOS=1.2}"
+                        Text="Awesome to have you parking with us!"
+                        TextColor="{StaticResource BlueColor}"
+                        VerticalOptions="Start" />
+                    <Label
+                        Margin="30,0"
+                        FontFamily="ModelicaMedium"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Start"
+                        LineHeight="{OnPlatform Android=1,
+                                                iOS=1.4}"
+                        Text="We're all ready to go, and we hope that you will really love using Beyond Park. We've sent an email to you confirming your details with us."
+                        TextColor="{StaticResource GrayColor}"
+                        VerticalOptions="StartAndExpand" />
+                </StackLayout>
+
+                <Grid
+                    BackgroundColor="Transparent"
+                    RowSpacing="{OnPlatform Android=14,
+                                            iOS=20}"
+                    VerticalOptions="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+
+                    <Button
+                        Command="{Binding ContinueCommand}"
+                        Style="{StaticResource ButtonStyle}"
+                        Text="Continue"
+                        WidthRequest="180" />
+
+                    <Label
+                        Grid.Row="1"
+                        FontFamily="ModelicaMedium"
+                        FontSize="{OnPlatform Android={StaticResource MidMediumSize},
+                                              iOS={StaticResource BaseFontSize}}"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="Didn't get the confirmation? Send again"
+                        TextColor="{StaticResource GrayColor}"
+                        VerticalOptions="End" />
+
+                </Grid>
+            </StackLayout>
+        </Grid>-->
+    </base:ContentPageBaseView.MainContent>
+</base:ContentPageBaseView>

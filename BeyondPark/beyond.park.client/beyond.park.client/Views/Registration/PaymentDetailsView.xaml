@@ -1,0 +1,557 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<base:ContentPageBaseView
+    x:Class="beyond.park.client.Views.Registration.PaymentDetailsView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:base="clr-namespace:beyond.park.client.Views.Base"
+    xmlns:behaviors="clr-namespace:beyond.park.client.Behaviors"
+    xmlns:behaviors1="clr-namespace:XamarinFastEntrySample.FastEntry;assembly=XamarinFastEntry.Behaviors"
+    xmlns:controls="clr-namespace:beyond.park.client.Controls"
+    xmlns:dependency="clr-namespace:beyond.park.client.ViewModels.Base"
+    xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+    xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:pancakeview="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:triggers="clr-namespace:beyond.park.client.Triggers"
+    dependency:DependencyLocator.AutoWireViewModel="True"
+    BackgroundColor="{StaticResource WhiteColor}">
+
+    <base:ContentPageBaseView.Resources>
+        <OnPlatform x:Key="entryMargin" x:TypeArguments="Thickness">
+            <On Platform="iOS">
+                <OnIdiom
+                    x:TypeArguments="Thickness"
+                    Phone="0,0,0,20"
+                    Tablet="0,0,0,20" />
+            </On>
+            <On Platform="Android">
+                <OnIdiom
+                    x:TypeArguments="Thickness"
+                    Phone="0,0,0,5"
+                    Tablet="0,0,0,5" />
+            </On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="contentPadding" x:TypeArguments="Thickness">
+            <On Platform="iOS">
+                <OnIdiom
+                    x:TypeArguments="Thickness"
+                    Phone="0,40,0,0"
+                    Tablet="0,40,0,0" />
+            </On>
+            <On Platform="Android">
+                <OnIdiom
+                    x:TypeArguments="Thickness"
+                    Phone="0,16,0,0"
+                    Tablet="0,16,0,0" />
+            </On>
+        </OnPlatform>
+
+        <Style x:Key="entryStyle" TargetType="controls:EntryExtended">
+            <Setter Property="BackgroundColor" Value="{StaticResource WhiteColor}" />
+            <Setter Property="BorderColor" Value="{StaticResource GrayColor}" />
+            <Setter Property="BorderWidth" Value="1" />
+            <Setter Property="BorderRadius" Value="2" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="Keyboard" Value="Default" />
+            <Setter Property="ReturnType" Value="Next" />
+            <Setter Property="FontSize" Value="{OnPlatform iOS={StaticResource BigSize}, Android={StaticResource LargeSize}}" />
+            <Setter Property="TextColor" Value="{StaticResource GrayColor}" />
+            <Setter Property="FontFamily" Value="ModelicaMedium" />
+            <Style.Behaviors>
+                <behaviors1:XamarinFastEntryBehaviour MaxLength="1" />
+            </Style.Behaviors>
+            <Style.Triggers>
+                <EventTrigger Event="TextChanged">
+                    <triggers:BorderColorTriggerAction />
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+
+    </base:ContentPageBaseView.Resources>
+
+    <base:ContentPageBaseView.MainContent>
+        <Grid Padding="{StaticResource contentPadding}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="110" />
+                <RowDefinition Height="0.5*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <!--  BACKGROUND IMAGE  -->
+            <ffimageloadingsvg:SvgCachedImage
+                x:Name="backgroundImage"
+                Grid.Row="0"
+                Grid.RowSpan="5"
+                Aspect="AspectFill"
+                Source="resource://beyond.park.client.Resources.Images.ic_blue_background.svg"
+                TranslationY="0"
+                VerticalOptions="End" />
+            <!--  ACCOUNT SETUP  -->
+            <Grid
+                Grid.Row="0"
+                BackgroundColor="Transparent"
+                RowSpacing="17">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{OnPlatform Android=50, iOS=45}" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Label
+                    Grid.Row="0"
+                    Padding="29,0"
+                    FontSize="{StaticResource BaseFontSize}"
+                    HorizontalOptions="Start"
+                    HorizontalTextAlignment="Start"
+                    LineHeight="1.4"
+                    Text="Account Setup"
+                    TextColor="{StaticResource GrayColor}"
+                    VerticalOptions="End" />
+
+                <ffimageloadingsvg:SvgCachedImage
+                    HeightRequest="40"
+                    HorizontalOptions="Center"
+                    Source="resource://beyond.park.client.Resources.Images.ic_logo_blue.svg"
+                    TranslationY="0"
+                    VerticalOptions="Start"
+                    WidthRequest="40" />
+
+                <Grid
+                    Grid.Row="1"
+                    Padding="29,0"
+                    BackgroundColor="Transparent"
+                    ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid
+                        Grid.Column="0"
+                        HeightRequest="40"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center"
+                        WidthRequest="40">
+
+                        <ffimageloadingsvg:SvgCachedImage Source="resource://beyond.park.client.Resources.Images.ic_user_green.svg" TranslationY="0" />
+
+                        <ffimageloadingsvg:SvgCachedImage
+                            HeightRequest="15"
+                            HorizontalOptions="Center"
+                            Source="resource://beyond.park.client.Resources.Images.ic_done_green.svg"
+                            TranslationX="24"
+                            TranslationY="-20"
+                            VerticalOptions="Center"
+                            WidthRequest="15" />
+                    </Grid>
+
+                    <BoxView
+                        Grid.Column="1"
+                        HeightRequest="2"
+                        VerticalOptions="Center"
+                        Color="{StaticResource GrayColor}" />
+
+                    <Grid
+                        Grid.Column="2"
+                        HeightRequest="40"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center"
+                        WidthRequest="40">
+
+                        <ffimageloadingsvg:SvgCachedImage Source="resource://beyond.park.client.Resources.Images.ic_vehicle_green.svg" TranslationY="0" />
+
+                        <ffimageloadingsvg:SvgCachedImage
+                            HeightRequest="15"
+                            HorizontalOptions="Center"
+                            Source="resource://beyond.park.client.Resources.Images.ic_done_green.svg"
+                            TranslationX="24"
+                            TranslationY="-20"
+                            VerticalOptions="Center"
+                            WidthRequest="15" />
+                    </Grid>
+
+
+                    <BoxView
+                        Grid.Column="3"
+                        HeightRequest="2"
+                        VerticalOptions="Center"
+                        Color="{StaticResource GrayColor}" />
+
+                    <ffimageloadingsvg:SvgCachedImage
+                        Grid.Column="4"
+                        HeightRequest="40"
+                        HorizontalOptions="End"
+                        Source="resource://beyond.park.client.Resources.Images.ic_card_light_gray.svg"
+                        TranslationY="0"
+                        VerticalOptions="Center"
+                        WidthRequest="40" />
+                </Grid>
+                <!--  CLOSE BUTTON  -->
+                <Grid
+                    Grid.Row="0"
+                    Padding="0,0"
+                    BackgroundColor="Transparent">
+                    <ContentView
+                        Padding="16,0"
+                        HorizontalOptions="End"
+                        IsVisible="true"
+                        VerticalOptions="Fill">
+                        <ContentView.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding CloseCommand}" />
+                        </ContentView.GestureRecognizers>
+                        <ffimageloadingsvg:SvgCachedImage
+                            HeightRequest="14"
+                            HorizontalOptions="End"
+                            Source="resource://beyond.park.client.Resources.Images.ic_close.svg"
+                            TranslationY="0"
+                            VerticalOptions="Start"
+                            WidthRequest="14" />
+                    </ContentView>
+                </Grid>
+            </Grid>
+            <!--  PURPOSE  -->
+            <StackLayout
+                Grid.Row="1"
+                Margin="0,8,0,0"
+                Padding="29,0"
+                BackgroundColor="Transparent"
+                Spacing="0">
+                <Label
+                    FontFamily="ModelicaBold"
+                    FontSize="25"
+                    HorizontalOptions="Start"
+                    HorizontalTextAlignment="Start"
+                    LineHeight="1.2"
+                    Text="Payment Details"
+                    TextColor="{StaticResource BlueColor}"
+                    VerticalOptions="Start" />
+                <Label
+                    FontFamily="ModelicaMedium"
+                    FontSize="{OnPlatform Android={StaticResource LittleSize},
+                                          iOS={StaticResource BaseFontSize}}"
+                    HorizontalOptions="Start"
+                    HorizontalTextAlignment="Start"
+                    LineHeight="{OnPlatform Android=1.2,
+                                            iOS=1.2}"
+                    Text="And finally, we need your payment details to complete the account setup. You will only be charged on a usage basis."
+                    TextColor="{StaticResource GrayColor}"
+                    VerticalOptions="StartAndExpand" />
+            </StackLayout>
+            <!--  MAIN CONTENT  -->
+            <Grid
+                Grid.Row="2"
+                Padding="29,0,29,0"
+                BackgroundColor="Transparent"
+                IsVisible="{Binding IsManually, Converter={StaticResource InverseBoolConverter}}"
+                RowSpacing="20"
+                VerticalOptions="End">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <!--  SCAN CARD  -->
+                <pancakeview:PancakeView
+                    BackgroundColor="{StaticResource WhiteColor}"
+                    Border="{pancakeview:BorderMarkup Color={StaticResource GrayColor},
+                                                      Thickness=1}"
+                    CornerRadius="4"
+                    HeightRequest="100"
+                    VerticalOptions="Center">
+                    <pancakeview:PancakeView.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ScanCommand}" NumberOfTapsRequired="1" />
+                    </pancakeview:PancakeView.GestureRecognizers>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <ffimageloadingsvg:SvgCachedImage
+                            Grid.Column="0"
+                            Margin="19,0"
+                            HeightRequest="40"
+                            HorizontalOptions="Center"
+                            IsVisible="true"
+                            Source="resource://beyond.park.client.Resources.Images.ic_scan_card.svg"
+                            TranslationX="0"
+                            VerticalOptions="Center"
+                            WidthRequest="40" />
+
+                        <Label
+                            Grid.Column="1"
+                            FontFamily="ModelicaBold"
+                            HorizontalOptions="Start"
+                            LineHeight="1.4"
+                            Text="Scan card with your phone"
+                            TextColor="{StaticResource GrayColor}"
+                            VerticalOptions="Center"
+                            VerticalTextAlignment="Center" />
+                    </Grid>
+                </pancakeview:PancakeView>
+                <!--  MANUALLY  -->
+                <pancakeview:PancakeView
+                    Grid.Row="1"
+                    BackgroundColor="{StaticResource WhiteColor}"
+                    Border="{pancakeview:BorderMarkup Color={StaticResource GrayColor},
+                                                      Thickness=1}"
+                    CornerRadius="4"
+                    HeightRequest="100"
+                    VerticalOptions="Center">
+                    <pancakeview:PancakeView.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ManuallyCommand}" NumberOfTapsRequired="1" />
+                    </pancakeview:PancakeView.GestureRecognizers>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <ffimageloadingsvg:SvgCachedImage
+                            Grid.Column="0"
+                            Margin="19,0"
+                            HeightRequest="40"
+                            HorizontalOptions="Center"
+                            IsVisible="true"
+                            Source="resource://beyond.park.client.Resources.Images.ic_edit.svg"
+                            TranslationX="0"
+                            VerticalOptions="Center"
+                            WidthRequest="40" />
+
+                        <Label
+                            Grid.Column="1"
+                            FontFamily="ModelicaBold"
+                            HorizontalOptions="Start"
+                            LineHeight="1.4"
+                            Text="Enter your details manually"
+                            TextColor="{StaticResource GrayColor}"
+                            VerticalOptions="Center"
+                            VerticalTextAlignment="Center" />
+                    </Grid>
+                </pancakeview:PancakeView>
+            </Grid>
+
+            <StackLayout
+                Grid.Row="2"
+                Margin="0,0,0,0"
+                Padding="29,10,29,0"
+                BackgroundColor="Transparent"
+                IsVisible="{Binding IsManually}"
+                Spacing="0"
+                VerticalOptions="End">
+                <!--  CARD NUMBER  -->
+                <Label Style="{StaticResource HeaderLabelStyle}" Text="Card Number" />
+                <Grid Margin="{StaticResource entryMargin}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid HeightRequest="40" VerticalOptions="Center">
+                        <controls:EntryExtended Style="{StaticResource EntryExtendedStyle}" Text="{Binding CardNumber.Value}">
+                            <controls:EntryExtended.Behaviors>
+                                <behaviors:EventToCommandBehavior Command="{Binding ValidateNameCommand}" EventName="Completed" />
+                                <behaviors1:XamarinFastEntryBehaviour Mask="####-####-####-####" MaxLength="19" />
+                                <!--<behaviors:EventToCommandBehavior Command="{Binding CleanServerErrorCommand}" EventName="TextChanged" />-->
+                            </controls:EntryExtended.Behaviors>
+                            <Entry.Keyboard>
+                                <Keyboard x:FactoryMethod="Create">
+                                    <x:Arguments>
+                                        <KeyboardFlags>None</KeyboardFlags>
+                                    </x:Arguments>
+                                </Keyboard>
+                            </Entry.Keyboard>
+                        </controls:EntryExtended>
+                        <ffimageloadingsvg:SvgCachedImage
+                            Margin="0,0,7,0"
+                            HeightRequest="5"
+                            HorizontalOptions="End"
+                            IsVisible="{Binding CardNumber.IsValid}"
+                            Source="resource://beyond.park.client.Resources.Images.ic_done.svg"
+                            VerticalOptions="Center" />
+                    </Grid>
+                    <Label
+                        Grid.Row="1"
+                        Style="{StaticResource ValidationErrorLabelStyle}"
+                        Text="{Binding Name.Errors, Converter={StaticResource ErrorConvertter}}" />
+                    <Label
+                        Grid.Row="1"
+                        IsVisible="{Binding ServerError, Converter={StaticResource StringToBoolConverter}}"
+                        Style="{StaticResource ValidationErrorLabelStyle}"
+                        Text="{Binding ServerError}" />
+                </Grid>
+
+                <Grid BackgroundColor="Transparent" ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <!--  EXPIRY DATE  -->
+                    <StackLayout Grid.Column="0" Spacing="0">
+                        <Label Style="{StaticResource HeaderLabelStyle}" Text="Expiry Date" />
+                        <Grid Margin="{StaticResource entryMargin}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Grid HeightRequest="40" VerticalOptions="Center">
+                                <controls:EntryExtended Style="{StaticResource EntryExtendedStyle}" Text="{Binding ExpirationDate.Value}">
+                                    <controls:EntryExtended.Behaviors>
+                                        <behaviors:EventToCommandBehavior Command="{Binding ValidateNameCommand}" EventName="Completed" />
+                                        <behaviors1:XamarinFastEntryBehaviour Mask="#####" MaxLength="5" />
+                                        <!--<behaviors:EventToCommandBehavior Command="{Binding CleanServerErrorCommand}" EventName="TextChanged" />-->
+                                    </controls:EntryExtended.Behaviors>
+                                    <Entry.Keyboard>
+                                        <Keyboard x:FactoryMethod="Create">
+                                            <x:Arguments>
+                                                <KeyboardFlags>None</KeyboardFlags>
+                                            </x:Arguments>
+                                        </Keyboard>
+                                    </Entry.Keyboard>
+                                </controls:EntryExtended>
+                                <ffimageloadingsvg:SvgCachedImage
+                                    Margin="0,7,7,0"
+                                    HeightRequest="5"
+                                    HorizontalOptions="End"
+                                    IsVisible="{Binding ExpirationDate.IsValid}"
+                                    Source="resource://beyond.park.client.Resources.Images.ic_done.svg"
+                                    VerticalOptions="Start" />
+                            </Grid>
+                            <Label
+                                Grid.Row="1"
+                                Style="{StaticResource ValidationErrorLabelStyle}"
+                                Text="{Binding ExpirationDate.Errors, Converter={StaticResource ErrorConvertter}}" />
+                            <Label
+                                Grid.Row="1"
+                                IsVisible="{Binding ServerError, Converter={StaticResource StringToBoolConverter}}"
+                                Style="{StaticResource ValidationErrorLabelStyle}"
+                                Text="{Binding ServerError}" />
+                        </Grid>
+
+
+                    </StackLayout>
+                    <!--  CVV  -->
+                    <StackLayout Grid.Column="1" Spacing="0">
+                        <Label Style="{StaticResource HeaderLabelStyle}" Text="CVV" />
+                        <Grid Margin="{StaticResource entryMargin}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Grid HeightRequest="40" VerticalOptions="Center">
+                                <controls:EntryExtended Style="{StaticResource EntryExtendedStyle}" Text="{Binding Cvv.Value}">
+                                    <controls:EntryExtended.Behaviors>
+                                        <behaviors:EventToCommandBehavior Command="{Binding ValidateNameCommand}" EventName="Completed" />
+                                        <!--<behaviors:EventToCommandBehavior Command="{Binding CleanServerErrorCommand}" EventName="TextChanged" />-->
+                                    </controls:EntryExtended.Behaviors>
+                                    <Entry.Keyboard>
+                                        <Keyboard x:FactoryMethod="Create">
+                                            <x:Arguments>
+                                                <KeyboardFlags>None</KeyboardFlags>
+                                            </x:Arguments>
+                                        </Keyboard>
+                                    </Entry.Keyboard>
+                                </controls:EntryExtended>
+                                <ffimageloadingsvg:SvgCachedImage
+                                    Margin="0,7,7,0"
+                                    HeightRequest="5"
+                                    HorizontalOptions="End"
+                                    IsVisible="{Binding Cvv.IsValid}"
+                                    Source="resource://beyond.park.client.Resources.Images.ic_done.svg"
+                                    VerticalOptions="Start" />
+                            </Grid>
+                            <Label
+                                Grid.Row="1"
+                                Style="{StaticResource ValidationErrorLabelStyle}"
+                                Text="{Binding Name.Errors, Converter={StaticResource ErrorConvertter}}" />
+                            <Label
+                                Grid.Row="1"
+                                IsVisible="{Binding ServerError, Converter={StaticResource StringToBoolConverter}}"
+                                Style="{StaticResource ValidationErrorLabelStyle}"
+                                Text="{Binding ServerError}" />
+                        </Grid>
+                    </StackLayout>
+                </Grid>
+                <!--  NAME ON CARD  -->
+                <Label Style="{StaticResource HeaderLabelStyle}" Text="Name on card" />
+                <Grid Margin="{StaticResource entryMargin}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid HeightRequest="40" VerticalOptions="Center">
+                        <controls:EntryExtended Style="{StaticResource EntryExtendedStyle}" Text="{Binding HolderName.Value}">
+                            <controls:EntryExtended.Behaviors>
+                                <behaviors:EventToCommandBehavior Command="{Binding ValidateNameCommand}" EventName="Completed" />
+                                <!--<behaviors:EventToCommandBehavior Command="{Binding CleanServerErrorCommand}" EventName="TextChanged" />-->
+                            </controls:EntryExtended.Behaviors>
+                            <Entry.Keyboard>
+                                <Keyboard x:FactoryMethod="Create">
+                                    <x:Arguments>
+                                        <KeyboardFlags>None</KeyboardFlags>
+                                    </x:Arguments>
+                                </Keyboard>
+                            </Entry.Keyboard>
+                        </controls:EntryExtended>
+                        <ffimageloadingsvg:SvgCachedImage
+                            Margin="0,0,7,0"
+                            HeightRequest="5"
+                            HorizontalOptions="End"
+                            IsVisible="{Binding HolderName.IsValid}"
+                            Source="resource://beyond.park.client.Resources.Images.ic_done.svg"
+                            VerticalOptions="Center" />
+                    </Grid>
+                    <Label
+                        Grid.Row="1"
+                        Style="{StaticResource ValidationErrorLabelStyle}"
+                        Text="{Binding HolderName.Errors, Converter={StaticResource ErrorConvertter}}" />
+                    <Label
+                        Grid.Row="1"
+                        IsVisible="{Binding ServerError, Converter={StaticResource StringToBoolConverter}}"
+                        Style="{StaticResource ValidationErrorLabelStyle}"
+                        Text="{Binding ServerError}" />
+                </Grid>
+            </StackLayout>
+            <!--  BACK BUTTON  -->
+            <StackLayout
+                Grid.Row="3"
+                Padding="20,0"
+                HeightRequest="48"
+                HorizontalOptions="Center"
+                Orientation="Horizontal"
+                Spacing="8">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackCommand}" />
+                </StackLayout.GestureRecognizers>
+
+                <ffimageloadingsvg:SvgCachedImage
+                    HeightRequest="12"
+                    Source="resource://beyond.park.client.Resources.Images.ic_arrow.svg"
+                    TranslationY="0" />
+
+                <Label
+                    FontFamily="ModelicaBold"
+                    HorizontalOptions="Fill"
+                    IsVisible="true"
+                    Text="Back"
+                    TextColor="{StaticResource GrayColor}"
+                    VerticalOptions="Center" />
+            </StackLayout>
+            <!--  BUTTON  -->
+            <Button
+                Grid.Row="4"
+                Margin="29,0,29,20"
+                BackgroundColor="{StaticResource GrayColor}"
+                Command="{Binding ContinueCommand}"
+                HorizontalOptions="Fill"
+                Style="{StaticResource ButtonStyle}"
+                Text="Continue" />
+        </Grid>
+    </base:ContentPageBaseView.MainContent>
+</base:ContentPageBaseView>

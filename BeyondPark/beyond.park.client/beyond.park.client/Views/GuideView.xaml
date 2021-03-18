@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<base:ContentPageBaseView
+    x:Class="beyond.park.client.Views.GuideView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:base="clr-namespace:beyond.park.client.Views.Base"
+    xmlns:control="clr-namespace:beyond.park.client.Controls"
+    xmlns:dependency="clr-namespace:beyond.park.client.ViewModels.Base"
+    xmlns:ef="clr-namespace:AiForms.Effects;assembly=AiForms.Effects"
+    xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:theme="clr-namespace:ThemeGallery"
+    dependency:DependencyLocator.AutoWireViewModel="True"
+    BackgroundColor="{StaticResource WhiteColor}">
+
+    <base:ContentPageBaseView.MainContent>
+        <Grid BackgroundColor="{StaticResource WhiteColor}" RowSpacing="{OnPlatform Android=5, iOS=20}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <CarouselView
+                HorizontalScrollBarVisibility="Never"
+                ItemsSource="{Binding Screens}"
+                Position="{Binding Position}">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <ffimageloadingsvg:SvgCachedImage
+                            Aspect="AspectFill"
+                            Source="{Binding IconPath}"
+                            TranslationY="0" />
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+
+            <StackLayout Spacing="14" VerticalOptions="End">
+                <ffimageloadingsvg:SvgCachedImage
+                    HeightRequest="58"
+                    HorizontalOptions="Center"
+                    Source="resource://beyond.park.client.Resources.Images.ic_logo_blue.svg"
+                    TranslationY="0"
+                    WidthRequest="58" />
+
+                <control:CarouselIndicators
+                    IndicatorHeight="16"
+                    IndicatorWidth="16"
+                    ItemsSource="{Binding Screens}"
+                    Position="{Binding Position}"
+                    SelectedIndicator="resource://beyond.park.client.Resources.Images.ic_selected.svg"
+                    UnselectedIndicator="resource://beyond.park.client.Resources.Images.ic_deselected.svg" />
+            </StackLayout>
+
+            <StackLayout
+                Grid.Row="1"
+                Margin="0,0,0,17"
+                Spacing="0">
+
+                <StackLayout
+                    Padding="0,10,0,0"
+                    BackgroundColor="Transparent"
+                    Spacing="{OnPlatform Android=10,
+                                         iOS=20}"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        FontFamily="ModelicaBold"
+                        FontSize="25"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        LineHeight="{OnPlatform Android=1.0,
+                                                iOS=1.2}"
+                        Text="{Binding Title}"
+                        TextColor="{StaticResource BlueColor}"
+                        VerticalOptions="Start" />
+                    <Label
+                        Margin="30,0"
+                        FontFamily="ModelicaMedium"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Start"
+                        LineHeight="{OnPlatform Android=1.2,
+                                                iOS=1.4}"
+                        Text="{Binding Description}"
+                        TextColor="{StaticResource GrayColor}"
+                        VerticalOptions="StartAndExpand" />
+                </StackLayout>
+
+                <Grid
+                    BackgroundColor="Transparent"
+                    RowSpacing="{OnPlatform Android=14,
+                                            iOS=20}"
+                    VerticalOptions="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Button
+                        Command="{Binding RegisterCommand}"
+                        IsVisible="{Binding IsShownButton}"
+                        Style="{StaticResource ButtonStyle}"
+                        Text="Sign Up"
+                        WidthRequest="180" />
+
+                    <Button
+                        BackgroundColor="{StaticResource GrayColor}"
+                        Command="{Binding NextCommand}"
+                        IsVisible="{Binding IsShownButton, Converter={StaticResource InverseBoolConverter}}"
+                        Style="{StaticResource ButtonStyle}"
+                        Text="Next"
+                        WidthRequest="180" />
+
+                    <Label
+                        Grid.Row="1"
+                        HorizontalOptions="CenterAndExpand"
+                        IsVisible="{Binding IsShownButton, Converter={StaticResource InverseBoolConverter}}"
+                        Text="skip this tour, let me look inside!"
+                        TextColor="{StaticResource GrayColor}"
+                        VerticalOptions="End" />
+
+                    <Label
+                        Grid.Row="1"
+                        FontFamily="ModelicaMedium"
+                        HorizontalOptions="CenterAndExpand"
+                        IsVisible="{Binding IsShownButton}"
+                        Text="I just want to look around for now"
+                        TextColor="{StaticResource GrayColor}"
+                        VerticalOptions="End" />
+                </Grid>
+            </StackLayout>
+        </Grid>
+    </base:ContentPageBaseView.MainContent>
+</base:ContentPageBaseView>

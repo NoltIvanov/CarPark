@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="beyond.park.client.Views.Base.ContentPageBaseView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:beyond.park.client.Controls"
+    xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:popups="clr-namespace:beyond.park.client.Controls.Popups"
+    ios:Page.UseSafeArea="False"
+    NavigationPage.HasNavigationBar="False">
+
+    <Grid
+        BackgroundColor="White"
+        ColumnSpacing="0"
+        RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="0" />
+        </Grid.RowDefinitions>
+
+        <!--  App background image spot  -->
+        <Grid x:Name="_appBackgroundImageSpot_Grid" Grid.Row="0">
+
+            <!--  Background image  -->
+            <ffimage:CachedImage x:Name="_backgroundImage_CachedImage" Aspect="AspectFill" />
+
+            <!--  Semi transparent backing  -->
+            <BoxView BackgroundColor="#AAF3F5FA" />
+        </Grid>
+
+        <!--  Main content with menus  -->
+        <Grid
+            Grid.Row="0"
+            ColumnSpacing="0"
+            RowSpacing="0">
+            <Grid.RowDefinitions>
+                <!--  Row for hiding  -->
+                <RowDefinition Height="0" />
+                <!--  Row for action bar, menu  -->
+                <RowDefinition Height="Auto" />
+                <!--  Main content row  -->
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!--  Main content elements  -->
+            <Grid
+                Grid.Row="2"
+                ColumnSpacing="0"
+                RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!--  Main content spot  -->
+                <ContentView Grid.Row="0">
+                    <Grid x:Name="_contentBox_Grid" Grid.Row="0" />
+                </ContentView>
+
+                <!--  Bottom bar spot  -->
+                <Grid
+                    x:Name="_bottomBarSpot_Grid"
+                    Grid.Row="1"
+                    ColumnSpacing="0" />
+            </Grid>
+
+            <!--  Menu  -->
+            <ScrollView x:Name="_menuContentSpot_ScrollView" Grid.Row="0" />
+
+            <!--  Action bar spot  -->
+            <ContentView x:Name="_actionBarSpot_ContentView" Grid.Row="1" />
+        </Grid>
+
+        <!--  Popup spot  -->
+        <ContentView x:Name="_popupSpot_ContentView" Grid.Row="1">
+            <popups:PopupsBlockView x:Name="_popupsKeeper_PopupsBlockView" />
+        </ContentView>
+
+        <controls:Indicator
+            x:Name="_busyIndicator_Indicator"
+            Grid.Row="1"
+            IndicatorColor="White"
+            PadCanvasColor="Black" />
+    </Grid>
+</ContentPage>

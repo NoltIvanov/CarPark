@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<actionbars:ActionBarBaseView
+    x:Class="beyond.park.client.Views.ActionBars.CommonActionBarView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:actionbars="clr-namespace:beyond.park.client.Controls.ActionBars"
+    xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms">
+
+    <actionbars:ActionBarBaseView.Resources />
+
+    <Grid
+        x:Name="mainContainer"
+        Padding="{StaticResource ActionBarPadding}"
+        BackgroundColor="{StaticResource BlueColor}"
+        HeightRequest="{StaticResource ActionBarHeight}"
+        RowSpacing="0">
+
+
+
+        <!--  LOGO  -->
+        <ContentView Padding="0,0" VerticalOptions="Fill">
+            <StackLayout
+                BackgroundColor="Transparent"
+                HorizontalOptions="Center"
+                Orientation="Horizontal">
+                <ffimageloadingsvg:SvgCachedImage
+                    HeightRequest="35"
+                    HorizontalOptions="Center"
+                    Source="resource://beyond.park.client.Resources.Images.ic_logo_white.svg"
+                    TranslationY="{OnPlatform Android=1,
+                                              iOS=2}"
+                    VerticalOptions="Center" />
+            </StackLayout>
+        </ContentView>
+
+        <!--  RIGHT BUTTON  -->
+        <ContentView
+            Padding="20,0"
+            HorizontalOptions="End"
+            IsVisible="true"
+            VerticalOptions="Fill">
+            <ContentView.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding HelpCommand}" />
+            </ContentView.GestureRecognizers>
+            <ffimageloadingsvg:SvgCachedImage
+                HeightRequest="35"
+                HorizontalOptions="Center"
+                Source="resource://beyond.park.client.Resources.Images.ic_face.svg"
+                TranslationY="0"
+                VerticalOptions="Center" />
+        </ContentView>
+
+        <!--  LEFT BUTTON  -->
+        <ContentView
+            Padding="20,0"
+            HorizontalOptions="Start"
+            IsVisible="true"
+            VerticalOptions="Fill">
+            <ContentView.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding OpemMenuCommand}" />
+            </ContentView.GestureRecognizers>
+            <ffimageloadingsvg:SvgCachedImage
+                HeightRequest="20"
+                HorizontalOptions="Center"
+                Source="resource://beyond.park.client.Resources.Images.ic_menu_white.svg"
+                TranslationY="0"
+                VerticalOptions="Center" />
+        </ContentView>
+    </Grid>
+</actionbars:ActionBarBaseView>

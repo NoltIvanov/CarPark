@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+
+  <style name="MainTheme" parent="MainTheme.Base">
+    <item name="colorPrimary">#2196F3</item>
+    <!-- colorPrimaryDark is used for the status bar -->
+    <item name="colorPrimaryDark">#22A5DA</item>
+    <!-- colorAccent is used as the default value for colorControlActivated
+         which is used to tint widgets -->
+    <item name="colorAccent">#5E7378</item>
+    
+    <item name="android:buttonStyle">@style/ButtonFix</item>
+  </style>
+  
+  <style name="ButtonFix" parent="Base.Widget.AppCompat.Button">
+    <item name="textAllCaps">false</item>
+  </style>
+</resources>

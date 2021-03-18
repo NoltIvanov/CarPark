@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<base:ContentPageBaseView
+    x:Class="beyond.park.client.Views.MainView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:actionbars="clr-namespace:beyond.park.client.Views.ActionBars"
+    xmlns:base="clr-namespace:beyond.park.client.Views.Base"
+    xmlns:bindings="clr-namespace:Xamarin.Forms.GoogleMaps.Bindings;assembly=Xamarin.Forms.GoogleMaps.Bindings"
+    xmlns:controls="clr-namespace:beyond.park.client.Controls"
+    xmlns:dependency="clr-namespace:beyond.park.client.ViewModels.Base"
+    xmlns:essentials="clr-namespace:Xamarin.Essentials;assembly=Xamarin.Essentials"
+    xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:googlemaps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    dependency:DependencyLocator.AutoWireViewModel="True"
+    BackgroundColor="{StaticResource WhiteColor}">
+
+    <base:ContentPageBaseView.Resources>
+        <OnPlatform x:Key="mainMargin" x:TypeArguments="Thickness">
+            <On Platform="iOS">
+                <OnIdiom
+                    x:TypeArguments="Thickness"
+                    Phone="0,40,2,0"
+                    Tablet="0,40,0,0" />
+            </On>
+            <On Platform="Android">
+                <OnIdiom
+                    x:TypeArguments="Thickness"
+                    Phone="0,40,0,0"
+                    Tablet="0,40,0,0" />
+            </On>
+        </OnPlatform>
+
+
+    </base:ContentPageBaseView.Resources>
+
+    <base:ContentPageBaseView.ActionBar>
+        <actionbars:CommonActionBarView />
+    </base:ContentPageBaseView.ActionBar>
+
+    <base:ContentPageBaseView.MainContent>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!--  FILTER BLOCK  -->
+            <StackLayout BackgroundColor="{StaticResource LightBlueColor}" Spacing="17">
+                <!--  SEARCH  -->
+                <Grid Margin="0,17,0,0">
+                    <Grid Margin="20,0" VerticalOptions="Center">
+                        <Frame
+                            Padding="0"
+                            CornerRadius="20"
+                            HasShadow="False">
+                            <Grid>
+                                <ffimageloadingsvg:SvgCachedImage
+                                    Margin="14,0,0,0"
+                                    HeightRequest="16"
+                                    HorizontalOptions="Start"
+                                    Source="resource://beyond.park.client.Resources.Images.ic_search.svg"
+                                    TranslationY="0"
+                                    VerticalOptions="Center"
+                                    WidthRequest="14" />
+                                <controls:EntryExtended
+                                    ReturnCommand="{Binding SearchCommand}"
+                                    Style="{StaticResource SearchEntryStyle}"
+                                    Text="{Binding TargetValue}" />
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                </Grid>
+
+                <!--  FILTER  -->
+                <Grid Margin="0,0,0,17">
+                    <Grid Margin="20,0,0,0" VerticalOptions="Center">
+                        <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
+                            <StackLayout BindableLayout.ItemsSource="{Binding FilterItemViewModels}" Orientation="Horizontal">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid VerticalOptions="Center">
+                                            <controls:FilterView
+                                                Title="{Binding Title}"
+                                                CornerRadius="20"
+                                                HeightRequest="38"
+                                                IsSelected="{Binding IsSelected}"
+                                                SelectCommand="{Binding SelectedFilterCommand}"
+                                                VerticalOptions="Center" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </StackLayout>
+                        </ScrollView>
+                    </Grid>
+                </Grid>
+            </StackLayout>
+
+            <!--  MAP  -->
+            <Grid Grid.Row="1">
+                <googlemaps:Map
+                    HorizontalOptions="Fill"
+                    MyLocationEnabled="True"
+                    VerticalOptions="Fill">
+                    <googlemaps:Map.Behaviors>
+                        <bindings:BindingVisibleRegionBehavior Value="{Binding VisibleRegion}" />
+                        <bindings:MoveToRegionBehavior Request="{Binding MoveToRegionRequest}" />
+                        <bindings:BindingPinsBehavior Value="{Binding Pins}" />
+                    </googlemaps:Map.Behaviors>
+                </googlemaps:Map>
+            </Grid>
+        </Grid>
+    </base:ContentPageBaseView.MainContent>
+</base:ContentPageBaseView>

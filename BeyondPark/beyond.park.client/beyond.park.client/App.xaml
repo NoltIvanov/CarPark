@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application
+    x:Class="beyond.park.client.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:beyond.park.client.Controls"
+    xmlns:converters="clr-namespace:beyond.park.client.Converters"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core">
+
+    <Application.Resources>
+        <!--  COLORS  -->
+        <Color x:Key="MediumGrayColor">#C4C4C4</Color>
+        <Color x:Key="MediumBlueColor">#22A5DA</Color>
+        <Color x:Key="DarkYellowColor">#E0A606</Color>
+        <Color x:Key="LightBlueColor">#BFF1FF</Color>
+        <Color x:Key="LightGrayColor">#EDEDED</Color>
+        <Color x:Key="OrangeColor">#E0681B</Color>
+        <Color x:Key="GreenColor">#019571</Color>
+        <Color x:Key="WhiteColor">#ffffff</Color>
+        <Color x:Key="BlackColor">#000000</Color>
+        <Color x:Key="GrayColor">#5E737B</Color>
+        <Color x:Key="BlueColor">#0071BA</Color>
+        <Color x:Key="RedColor">#FF4D4F</Color>
+
+        <!--  FONT SIZES  -->
+        <OnPlatform
+            x:Key="BaseFontSize"
+            x:TypeArguments="x:Double"
+            Android="18"
+            Default="16"
+            iOS="16" />
+
+        <OnPlatform
+            x:Key="MicroSize"
+            x:TypeArguments="x:Double"
+            Android="12"
+            Default="12"
+            iOS="12" />
+
+        <OnPlatform
+            x:Key="LittleSize"
+            x:TypeArguments="x:Double"
+            Android="14"
+            Default="14"
+            iOS="14" />
+
+        <OnPlatform
+            x:Key="MidMediumSize"
+            x:TypeArguments="x:Double"
+            Android="16"
+            Default="16"
+            iOS="15" />
+
+        <OnPlatform
+            x:Key="MediumSize"
+            x:TypeArguments="x:Double"
+            Android="20"
+            Default="18"
+            iOS="18" />
+
+        <OnPlatform
+            x:Key="LargeSize"
+            x:TypeArguments="x:Double"
+            Android="24"
+            Default="20"
+            iOS="20" />
+
+        <OnPlatform
+            x:Key="LargerSize"
+            x:TypeArguments="x:Double"
+            Android="26"
+            Default="22"
+            iOS="22" />
+
+        <OnPlatform
+            x:Key="BigSize"
+            x:TypeArguments="x:Double"
+            Android="28"
+            Default="24"
+            iOS="24" />
+
+        <OnPlatform
+            x:Key="BiggestSize"
+            x:TypeArguments="x:Double"
+            Android="30"
+            Default="26"
+            iOS="26" />
+
+        <!--  CONVERTERS  -->
+        <converters:NullableObjectToBoolConverter x:Key="NullableObjectToBoolConverter" />
+
+        <converters:FirstValidationErrorConverter x:Key="ErrorConvertter" />
+
+        <converters:StringToBoolConverter x:Key="StringToBoolConverter" />
+
+        <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
+
+        <!--  EXPLICIT STYLES  -->
+        <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="FontFamily" Value="ModelicaBold" />
+            <Setter Property="Padding" Value="20,0" />
+            <Setter Property="HeightRequest" Value="48" />
+            <Setter Property="CornerRadius" Value="24" />
+            <Setter Property="FontSize" Value="{OnPlatform Android={StaticResource BaseFontSize}, iOS={StaticResource MediumSize}}" />
+            <Setter Property="BackgroundColor" Value="{StaticResource OrangeColor}" />
+            <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+
+        <Style x:Key="EntryExtendedStyle" TargetType="controls:EntryExtended">
+            <Setter Property="FontFamily" Value="ModelicaMedium" />
+            <Setter Property="ReturnType" Value="Next" />
+            <Setter Property="TextColor" Value="{StaticResource GrayColor}" />
+            <Setter Property="FontSize" Value="{OnPlatform Android={StaticResource MidMediumSize}, iOS={StaticResource BaseFontSize}}" />
+            <Setter Property="HorizontalOptions" Value="Fill" />
+            <Setter Property="HorizontalTextAlignment" Value="Start" />
+            <Setter Property="BackgroundColor" Value="{StaticResource WhiteColor}" />
+            <Setter Property="BorderColor" Value="{StaticResource GrayColor}" />
+            <Setter Property="BorderWidth" Value="1" />
+            <Setter Property="BorderRadius" Value="2" />
+            <Setter Property="ios:Entry.CursorColor" Value="{StaticResource GrayColor}" />
+            <Setter Property="LeftPadding" Value="13" />
+            <Setter Property="RightPadding" Value="13" />
+            <Style.Triggers>
+                <Trigger TargetType="controls:EntryExtended" Property="IsFocused" Value="True">
+                    <Setter Property="BorderColor" Value="{StaticResource OrangeColor}" />
+                    <Setter Property="BorderWidth" Value="2" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="SearchEntryStyle" TargetType="controls:EntryExtended">
+            <Setter Property="FontFamily" Value="ModelicaBold" />
+            <Setter Property="HeightRequest" Value="38" />
+            <Setter Property="ReturnType" Value="Search" />
+            <Setter Property="TextColor" Value="{StaticResource GrayColor}" />
+            <Setter Property="FontSize" Value="{OnPlatform Android={StaticResource MidMediumSize}, iOS={StaticResource BaseFontSize}}" />
+            <Setter Property="HorizontalOptions" Value="Fill" />
+            <Setter Property="HorizontalTextAlignment" Value="Start" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="BorderColor" Value="Transparent" />
+            <Setter Property="BorderWidth" Value="1" />
+            <Setter Property="BorderRadius" Value="20" />
+            <Setter Property="ios:Entry.CursorColor" Value="{StaticResource GrayColor}" />
+            <Setter Property="LeftPadding" Value="38" />
+            <Setter Property="RightPadding" Value="13" />
+            <Style.Triggers>
+                <Trigger TargetType="controls:EntryExtended" Property="IsFocused" Value="True">
+                    <Setter Property="BorderColor" Value="{StaticResource OrangeColor}" />
+                    <Setter Property="BorderWidth" Value="2" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="HeaderLabelStyle" TargetType="{x:Type Label}">
+            <Setter Property="FontSize" Value="{OnPlatform Android={StaticResource MicroSize}, iOS={StaticResource LittleSize}}" />
+            <Setter Property="Margin" Value="0,0,0,5" />
+            <Setter Property="TextColor" Value="{StaticResource GrayColor}" />
+            <Setter Property="FontFamily" Value="ModelicaBold" />
+            <Setter Property="HorizontalOptions" Value="Start" />
+        </Style>
+
+        <Style x:Key="ValidationErrorLabelStyle" TargetType="{x:Type Label}">
+            <Setter Property="TextColor" Value="{StaticResource RedColor}" />
+            <Setter Property="FontSize" Value="{StaticResource MicroSize}" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="FontFamily" Value="ModelicaMedium" />
+            <Setter Property="HorizontalOptions" Value="Start" />
+        </Style>
+
+        <OnPlatform x:Key="ActionBarPadding" x:TypeArguments="Thickness">
+            <On Platform="iOS">
+                <OnIdiom
+                    x:TypeArguments="Thickness"
+                    Phone="0,25,0,0"
+                    Tablet="0,20,0,0" />
+            </On>
+        </OnPlatform>
+
+        <OnPlatform x:Key="ActionBarHeight" x:TypeArguments="x:Double">
+            <On Platform="iOS">
+                <OnIdiom
+                    x:TypeArguments="x:Double"
+                    Phone="60"
+                    Tablet="60" />
+            </On>
+            <On Platform="Android">
+                <OnIdiom
+                    x:TypeArguments="x:Double"
+                    Phone="60"
+                    Tablet="60" />
+            </On>
+        </OnPlatform>
+
+        <!--  IMPLICIT STYLES  -->
+        <Style
+            ApplyToDerivedTypes="True"
+            CanCascade="True"
+            TargetType="Label">
+            <Setter Property="FontSize" Value="{StaticResource BaseFontSize}" />
+            <Setter Property="FontFamily" Value="ModelicaBold" />
+        </Style>
+
+        <Style
+            ApplyToDerivedTypes="True"
+            CanCascade="True"
+            TargetType="Grid">
+            <Setter Property="RowSpacing" Value="0" />
+            <Setter Property="ColumnSpacing" Value="0" />
+        </Style>
+    </Application.Resources>
+</Application>

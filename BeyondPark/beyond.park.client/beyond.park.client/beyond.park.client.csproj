@@ -1,0 +1,226 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Fonts\BwModelicaCyrillicDEMO-Bold.ttf" />
+    <None Remove="Resources\Fonts\BwModelicaCyrillicDEMO-ExtraBold.ttf" />
+    <None Remove="Resources\Fonts\BwModelicaCyrillicDEMO-Medium.ttf" />
+    <None Remove="Resources\Fonts\icomoon.ttf" />
+    <None Remove="Resources\Images\AV.jpg" />
+    <None Remove="Resources\Images\close_copy.svg" />
+    <None Remove="Resources\Images\Group354.svg" />
+    <None Remove="Resources\Images\ic_arrow.svg" />
+    <None Remove="Resources\Images\ic_arrow_orange.svg" />
+    <None Remove="Resources\Images\ic_avatar.svg" />
+    <None Remove="Resources\Images\ic_avatar_up.svg" />
+    <None Remove="Resources\Images\ic_blue_background.svg" />
+    <None Remove="Resources\Images\ic_card_blue.svg" />
+    <None Remove="Resources\Images\ic_card_light_gray.svg" />
+    <None Remove="Resources\Images\ic_carousel_1.png" />
+    <None Remove="Resources\Images\ic_carousel_2.png" />
+    <None Remove="Resources\Images\ic_carousel_3.png" />
+    <None Remove="Resources\Images\ic_carousel_4.png" />
+    <None Remove="Resources\Images\ic_checked.svg" />
+    <None Remove="Resources\Images\ic_close.svg" />
+    <None Remove="Resources\Images\ic_close_blue.svg" />
+    <None Remove="Resources\Images\ic_confirmation_background.png" />
+    <None Remove="Resources\Images\ic_deselected.svg" />
+    <None Remove="Resources\Images\ic_done.svg" />
+    <None Remove="Resources\Images\ic_done_green.svg" />
+    <None Remove="Resources\Images\ic_edit.svg" />
+    <None Remove="Resources\Images\ic_edit_simple.svg" />
+    <None Remove="Resources\Images\ic_face.svg" />
+    <None Remove="Resources\Images\ic_feedback_blue.svg" />
+    <None Remove="Resources\Images\ic_logo_blue.svg" />
+    <None Remove="Resources\Images\ic_logo_gray.svg" />
+    <None Remove="Resources\Images\ic_logo_transparent.svg" />
+    <None Remove="Resources\Images\ic_logo_white.svg" />
+    <None Remove="Resources\Images\ic_main_logo.svg" />
+    <None Remove="Resources\Images\ic_menu_white.svg" />
+    <None Remove="Resources\Images\ic_pin_back.png" />
+    <None Remove="Resources\Images\ic_pin_blue.svg" />
+    <None Remove="Resources\Images\ic_pop_line.svg" />
+    <None Remove="Resources\Images\ic_privacy_blue.svg" />
+    <None Remove="Resources\Images\ic_route_blue.svg" />
+    <None Remove="Resources\Images\ic_scan_card.svg" />
+    <None Remove="Resources\Images\ic_search.svg" />
+    <None Remove="Resources\Images\ic_selected.svg" />
+    <None Remove="Resources\Images\ic_tour_blue.svg" />
+    <None Remove="Resources\Images\ic_unchecked.svg" />
+    <None Remove="Resources\Images\ic_user_blue.svg" />
+    <None Remove="Resources\Images\ic_user_gray.svg" />
+    <None Remove="Resources\Images\ic_user_green.svg" />
+    <None Remove="Resources\Images\ic_vehicle_blue.svg" />
+    <None Remove="Resources\Images\ic_vehicle_gray.svg" />
+    <None Remove="Resources\Images\ic_vehicle_green.svg" />
+    <None Remove="Resources\Images\ic_vehicle_light_gray.svg" />
+    <None Remove="Resources\Images\ic_welcome_background.svg" />
+    <None Remove="Resources\Images\ic_without_car.png" />
+    <None Remove="Resources\Images\main_background.png" />
+    <None Remove="Resources\Images\main_background.svg" />
+    <None Remove="Resources\Images\s8984_1427143923 %282%29.svg" />
+    <None Remove="Resources\Images\star.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Fonts\BwModelicaCyrillicDEMO-Bold.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\BwModelicaCyrillicDEMO-ExtraBold.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\BwModelicaCyrillicDEMO-Medium.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\icomoon.ttf" />
+    <EmbeddedResource Include="Resources\Images\AV.jpg" />
+    <EmbeddedResource Include="Resources\Images\ic_arrow.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_arrow_orange.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_avatar.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_avatar_up.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_blue_background.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_card_blue.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_card_light_gray.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_carousel_1.png" />
+    <EmbeddedResource Include="Resources\Images\ic_carousel_2.png" />
+    <EmbeddedResource Include="Resources\Images\ic_carousel_3.png" />
+    <EmbeddedResource Include="Resources\Images\ic_carousel_4.png" />
+    <EmbeddedResource Include="Resources\Images\ic_checked.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_close.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_close_blue.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_confirmation_background.png" />
+    <EmbeddedResource Include="Resources\Images\ic_deselected.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_done.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_done_green.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_edit.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_edit_simple.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_face.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_feedback_blue.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_logo_blue.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_logo_gray.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_logo_transparent.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_logo_white.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_main_logo.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_menu_white.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_pin_back.png" />
+    <EmbeddedResource Include="Resources\Images\ic_pin_blue.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_pop_line.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_privacy_blue.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_route_blue.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_scan_card.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_search.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_selected.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_tour_blue.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_unchecked.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_user_blue.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_user_gray.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_user_green.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_vehicle_blue.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_vehicle_gray.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_vehicle_green.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_vehicle_light_gray.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_welcome_background.svg" />
+    <EmbeddedResource Include="Resources\Images\ic_without_car.png" />
+    <EmbeddedResource Include="Resources\Images\main_background.png" />
+    <EmbeddedResource Include="Resources\Images\star.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Acr.UserDialogs" Version="7.1.0.475" />
+    <PackageReference Include="AiForms.Effects" Version="1.6.10" />
+    <PackageReference Include="Autofac" Version="6.1.0" />
+    <PackageReference Include="MagicGradients" Version="1.2.0" />
+    <PackageReference Include="Microsoft.AppCenter" Version="4.1.0" />
+    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="4.1.0" />
+    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="4.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Plugin.PayCards" Version="1.1.1" />
+    <PackageReference Include="PubSub" Version="4.0.1" />
+    <PackageReference Include="SlideOverKit" Version="2.1.6.2" />
+    <PackageReference Include="System.Reactive" Version="5.0.0" />
+    <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
+    <PackageReference Include="Xamarin.CommunityToolkit" Version="1.0.2" />
+    <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+    <PackageReference Include="Xamarin.Forms.GoogleMaps" Version="3.1.0" />
+    <PackageReference Include="Xamarin.Forms.GoogleMaps.Bindings" Version="2.2.0" />
+    <PackageReference Include="Xamarin.Forms.PancakeView" Version="2.3.0.759" />
+    <PackageReference Include="XamarinFastEntry.Behaviors" Version="1.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\SideMenuView.xaml.cs">
+      <DependentUpon>SideMenuView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Controls\FilterView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\Indicator.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ActionBars\CommonActionBarView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Base\ContentPageBaseView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Base\CustomNavigationView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Base\SingleBottomItem.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\GuideView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\MainView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Popups\AccountCreationPopupView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Popups\CarparksPopupView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Popups\HelpSystemPopupView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Popups\NotSignUpPopupView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Popups\WelcomeBackPopupView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Registration\AccountCreatedView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Registration\LogInDetailsView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Registration\PaymentDetailsView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Registration\SignInView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Registration\VehicleDetailsView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\SideMenuView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\WelcomeView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

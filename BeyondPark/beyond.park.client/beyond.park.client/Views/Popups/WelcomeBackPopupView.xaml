@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<popups:SinglePopupViewBase
+    x:Class="beyond.park.client.Views.Popups.WelcomeBackPopupView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:beyond.park.client.Behaviors"
+    xmlns:behaviors1="clr-namespace:XamarinFastEntrySample.FastEntry;assembly=XamarinFastEntry.Behaviors"
+    xmlns:controls="clr-namespace:beyond.park.client.Controls"
+    xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:popups="clr-namespace:beyond.park.client.Controls.Popups"
+    xmlns:triggers="clr-namespace:beyond.park.client.Triggers"
+    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    CascadeInputTransparent="False"
+    InputTransparent="True">
+
+    <popups:SinglePopupViewBase.Resources>
+        <OnPlatform x:Key="mainMargin" x:TypeArguments="Thickness">
+            <On Platform="iOS">
+                <OnIdiom
+                    x:TypeArguments="Thickness"
+                    Phone="0,60,0,0"
+                    Tablet="0,60,0,0" />
+            </On>
+            <On Platform="Android">
+                <OnIdiom
+                    x:TypeArguments="Thickness"
+                    Phone="0,40,0,0"
+                    Tablet="0,40,0,0" />
+            </On>
+        </OnPlatform>
+    </popups:SinglePopupViewBase.Resources>
+
+    <popups:SinglePopupViewBase.Content>
+        <Grid BackgroundColor="{StaticResource WhiteColor}">
+            <ffimageloadingsvg:SvgCachedImage
+                Aspect="AspectFill"
+                Source="resource://beyond.park.client.Resources.Images.ic_welcome_background.svg"
+                VerticalOptions="End" />
+
+            <ffimageloadingsvg:SvgCachedImage
+                Margin="{StaticResource mainMargin}"
+                Aspect="AspectFit"
+                HorizontalOptions="Center"
+                Source="resource://beyond.park.client.Resources.Images.ic_main_logo.svg"
+                TranslationY="0"
+                VerticalOptions="Start"
+                WidthRequest="260" />
+
+            <Grid
+                BackgroundColor="Transparent"
+                RowSpacing="36"
+                VerticalOptions="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <yummy:PancakeView
+                    BackgroundColor="{StaticResource WhiteColor}"
+                    CornerRadius="{OnPlatform Android=150,
+                                              iOS=120}"
+                    HeightRequest="240"
+                    HorizontalOptions="Center"
+                    Shadow="{yummy:ShadowMarkup Color={StaticResource GrayColor},
+                                                Offset='0,10'}"
+                    VerticalOptions="End"
+                    WidthRequest="240">
+                    <Grid>
+                        <ffimageloadingsvg:SvgCachedImage
+                            HorizontalOptions="Center"
+                            Source="resource://beyond.park.client.Resources.Images.ic_avatar.svg"
+                            VerticalOptions="Center"
+                            WidthRequest="150" />
+
+                        <ffimageloadingsvg:SvgCachedImage
+                            HorizontalOptions="Center"
+                            IsVisible="{Binding StateChanged}"
+                            Source="resource://beyond.park.client.Resources.Images.ic_avatar_up.svg"
+                            VerticalOptions="Center"
+                            WidthRequest="150" />
+                    </Grid>
+                </yummy:PancakeView>
+
+                <Label
+                    Grid.Row="1"
+                    FontSize="25"
+                    HorizontalOptions="Center"
+                    Text="{Binding Name, StringFormat='Welcome back {0}!'}"
+                    TextColor="{StaticResource WhiteColor}"
+                    VerticalOptions="Start" />
+            </Grid>
+        </Grid>
+    </popups:SinglePopupViewBase.Content>
+</popups:SinglePopupViewBase>

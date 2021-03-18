@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<popups:SinglePopupViewBase
+    x:Class="beyond.park.client.Views.Popups.AccountCreationPopupView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:beyond.park.client.Behaviors"
+    xmlns:behaviors1="clr-namespace:XamarinFastEntrySample.FastEntry;assembly=XamarinFastEntry.Behaviors"
+    xmlns:controls="clr-namespace:beyond.park.client.Controls"
+    xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:popups="clr-namespace:beyond.park.client.Controls.Popups"
+    xmlns:triggers="clr-namespace:beyond.park.client.Triggers"
+    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    CascadeInputTransparent="False"
+    InputTransparent="True">
+
+    <popups:SinglePopupViewBase.Resources>
+        <OnPlatform x:Key="mainMargin" x:TypeArguments="Thickness">
+            <On Platform="iOS">
+                <OnIdiom
+                    x:TypeArguments="Thickness"
+                    Phone="29,40"
+                    Tablet="80,100" />
+            </On>
+            <On Platform="Android">
+                <OnIdiom
+                    x:TypeArguments="Thickness"
+                    Phone="29,40"
+                    Tablet="80,100" />
+            </On>
+        </OnPlatform>
+
+        <Style x:Key="entryStyle" TargetType="controls:EntryExtended">
+            <Setter Property="BorderColor" Value="{StaticResource GrayColor}" />
+            <Setter Property="BorderWidth" Value="1" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="Keyboard" Value="Numeric" />
+            <Setter Property="ReturnType" Value="Next" />
+            <Setter Property="FontSize" Value="{StaticResource BigSize}" />
+            <Setter Property="TextColor" Value="{StaticResource GrayColor}" />
+            <Setter Property="FontFamily" Value="ModelicaMedium" />
+            <Style.Behaviors>
+                <behaviors1:XamarinFastEntryBehaviour IsNumeric="true" MaxLength="1" />
+            </Style.Behaviors>
+            <Style.Triggers>
+                <EventTrigger Event="TextChanged">
+                    <triggers:BorderColorTriggerAction />
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </popups:SinglePopupViewBase.Resources>
+
+    <popups:SinglePopupViewBase.Content>
+        <yummy:PancakeView
+            Margin="{StaticResource mainMargin}"
+            Padding="20"
+            BackgroundColor="White"
+            CascadeInputTransparent="False"
+            CornerRadius="10"
+            HorizontalOptions="Center"
+            InputTransparent="True"
+            VerticalOptions="Center">
+            <Grid RowSpacing="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <!--  CLOSE BUTTON  -->
+                <Grid
+                    Grid.Row="0"
+                    Padding="0"
+                    BackgroundColor="Transparent">
+                    <ContentView
+                        Padding="0,0"
+                        HorizontalOptions="End"
+                        IsVisible="true"
+                        VerticalOptions="Fill">
+                        <ContentView.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ClosePopupCommand}" />
+                        </ContentView.GestureRecognizers>
+                        <ffimageloadingsvg:SvgCachedImage
+                            HeightRequest="14"
+                            HorizontalOptions="End"
+                            Source="resource://beyond.park.client.Resources.Images.ic_close.svg"
+                            TranslationY="0"
+                            VerticalOptions="Start"
+                            WidthRequest="14" />
+                    </ContentView>
+                </Grid>
+
+                <StackLayout Grid.Row="1" Spacing="10">
+                    <Label
+                        FontSize="{StaticResource MidMediumSize}"
+                        Text="Complete Account Creation"
+                        TextColor="{StaticResource OrangeColor}" />
+
+                    <Label
+                        FontFamily="ModelicaMedium"
+                        FontSize="{StaticResource LittleSize}"
+                        HorizontalTextAlignment="Start"
+                        LineHeight="1.2"
+                        Text="Thanks for joining Beyond Park! Your account been created. Please enter the 4-digit code we've sent to your email to confirm."
+                        TextColor="{StaticResource GrayColor}" />
+                </StackLayout>
+
+                <Grid
+                    Grid.Row="2"
+                    Margin="0,0,0,20"
+                    ColumnSpacing="20"
+                    HeightRequest="60">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <controls:EntryExtended
+                        Grid.Column="0"
+                        Style="{StaticResource entryStyle}"
+                        Text="{Binding FirstDigit}" />
+                    <controls:EntryExtended
+                        Grid.Column="1"
+                        Style="{StaticResource entryStyle}"
+                        Text="{Binding SecondDigit}" />
+                    <controls:EntryExtended
+                        Grid.Column="2"
+                        Style="{StaticResource entryStyle}"
+                        Text="{Binding ThirdDigit}" />
+                    <controls:EntryExtended
+                        Grid.Column="3"
+                        Style="{StaticResource entryStyle}"
+                        Text="{Binding FourthDigit}" />
+                </Grid>
+
+                <Button
+                    Grid.Row="3"
+                    BackgroundColor="{StaticResource GrayColor}"
+                    Command="{Binding ConfirmCodeCommand}"
+                    HorizontalOptions="Fill"
+                    Style="{StaticResource ButtonStyle}"
+                    Text="Confirm Code" />
+
+                <ActivityIndicator
+                    Grid.Row="4"
+                    HeightRequest="30"
+                    HorizontalOptions="Center"
+                    IsRunning="{Binding IsBusy}"
+                    WidthRequest="30"
+                    Color="{StaticResource GrayColor}" />
+
+                <Label
+                    Grid.Row="5"
+                    FontFamily="ModelicaMedium"
+                    FontSize="{StaticResource LittleSize}"
+                    HorizontalOptions="Center"
+                    Text="Open Email App"
+                    TextColor="{StaticResource BlueColor}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OpenEmailCommand}" NumberOfTapsRequired="1" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label
+                    Grid.Row="6"
+                    FontFamily="ModelicaMedium"
+                    FontSize="{StaticResource LittleSize}"
+                    HorizontalOptions="Center"
+                    Text="Didn't get it? Resend email?"
+                    TextColor="{StaticResource BlueColor}" />
+
+            </Grid>
+        </yummy:PancakeView>
+    </popups:SinglePopupViewBase.Content>
+</popups:SinglePopupViewBase>

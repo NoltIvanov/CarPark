@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<popups:SinglePopupViewBase
+    x:Class="beyond.park.client.Views.Popups.NotSignUpPopupView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:popups="clr-namespace:beyond.park.client.Controls.Popups"
+    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    BackingColor="{StaticResource GrayColor}"
+    CascadeInputTransparent="False"
+    InputTransparent="True">
+
+    <popups:SinglePopupViewBase.Resources>
+        <OnPlatform x:Key="mainMargin" x:TypeArguments="Thickness">
+            <On Platform="iOS">
+                <OnIdiom
+                    x:TypeArguments="Thickness"
+                    Phone="29,130,29,0"
+                    Tablet="80,100" />
+            </On>
+            <On Platform="Android">
+                <OnIdiom
+                    x:TypeArguments="Thickness"
+                    Phone="20,90,20,0"
+                    Tablet="80,100" />
+            </On>
+        </OnPlatform>
+    </popups:SinglePopupViewBase.Resources>
+
+    <popups:SinglePopupViewBase.Content>
+        <Grid
+            Margin="{StaticResource mainMargin}"
+            HorizontalOptions="Center"
+            VerticalOptions="Start">
+
+            <yummy:PancakeView
+                Padding="10"
+                BackgroundColor="{StaticResource WhiteColor}"
+                CascadeInputTransparent="False"
+                CornerRadius="10"
+                HorizontalOptions="Center"
+                InputTransparent="True"
+                VerticalOptions="Center">
+
+                <Grid Margin="0,40,0,0">
+                    <!--  MAIN CONTENT  -->
+                    <Grid
+                        Margin="10,0"
+                        IsVisible="{Binding MainContentShown}"
+                        RowDefinitions="auto,auto,auto,auto,auto,auto, auto,auto"
+                        VerticalOptions="Start">
+
+                        <Label
+                            Margin="0,0,0,10"
+                            FontFamily="ModelicaExtraBold"
+                            FontSize="{OnPlatform Android={StaticResource MidMediumSize},
+                                                  iOS={StaticResource BaseFontSize}}"
+                            HorizontalOptions="Center"
+                            Text="Why not sign up?"
+                            TextColor="{StaticResource BlueColor}"
+                            VerticalOptions="Center" />
+
+                        <Label
+                            Grid.Row="1"
+                            FontFamily="ModelicaMedium"
+                            FontSize="{OnPlatform Android={StaticResource MidMediumSize},
+                                                  iOS={StaticResource BaseFontSize}}"
+                            LineHeight="{OnPlatform iOS=1.56,
+                                                    Android=1.2}"
+                            Text="By signing up with Beyond Park, you will get the benefits of:"
+                            TextColor="#565656" />
+
+                        <Grid
+                            Grid.Row="2"
+                            Margin="0,20,0,0"
+                            ColumnDefinitions="auto,auto"
+                            ColumnSpacing="14">
+                            <ffimageloadingsvg:SvgCachedImage
+                                HeightRequest="26"
+                                HorizontalOptions="Center"
+                                Source="resource://beyond.park.client.Resources.Images.ic_logo_blue.svg"
+                                TranslationY="0"
+                                VerticalOptions="Start" />
+                            <Label
+                                Grid.Column="1"
+                                FontSize="{OnPlatform Android={StaticResource MidMediumSize},
+                                                      iOS={StaticResource BaseFontSize}}"
+                                HorizontalOptions="Center"
+                                LineHeight="1.4"
+                                Text="Contactless and seamless parking in all of our carparks"
+                                TextColor="#0071BC"
+                                TranslationY="{OnPlatform iOS=-8,
+                                                          Android=0}" />
+                        </Grid>
+
+                        <Grid
+                            Grid.Row="3"
+                            Margin="0,20,0,0"
+                            ColumnDefinitions="auto,auto"
+                            ColumnSpacing="14">
+                            <ffimageloadingsvg:SvgCachedImage
+                                HeightRequest="26"
+                                HorizontalOptions="Center"
+                                Source="resource://beyond.park.client.Resources.Images.ic_logo_blue.svg"
+                                TranslationY="0"
+                                VerticalOptions="Start" />
+                            <Label
+                                Grid.Column="1"
+                                FontSize="{OnPlatform Android={StaticResource MidMediumSize},
+                                                      iOS={StaticResource BaseFontSize}}"
+                                HorizontalOptions="Center"
+                                LineHeight="1.4"
+                                Text="24/7 security"
+                                TextColor="#0071BC"
+                                TranslationY="{OnPlatform iOS=-5,
+                                                          Android=-2}"
+                                VerticalOptions="Center" />
+                        </Grid>
+
+                        <Grid
+                            Grid.Row="4"
+                            Margin="0,20,0,0"
+                            ColumnDefinitions="auto,auto"
+                            ColumnSpacing="14">
+                            <ffimageloadingsvg:SvgCachedImage
+                                HeightRequest="26"
+                                HorizontalOptions="Center"
+                                Source="resource://beyond.park.client.Resources.Images.ic_logo_blue.svg"
+                                TranslationY="0"
+                                VerticalOptions="Start" />
+                            <Label
+                                Grid.Column="1"
+                                FontSize="{OnPlatform Android={StaticResource MidMediumSize},
+                                                      iOS={StaticResource BaseFontSize}}"
+                                HorizontalOptions="Center"
+                                LineHeight="1.4"
+                                Text="Special parking guidance"
+                                TextColor="#0071BC"
+                                TranslationY="{OnPlatform iOS=-5,
+                                                          Android=-2}"
+                                VerticalOptions="Center" />
+                        </Grid>
+
+                        <Grid
+                            Grid.Row="5"
+                            Margin="0,20,0,0"
+                            ColumnDefinitions="auto,auto"
+                            ColumnSpacing="14">
+                            <ffimageloadingsvg:SvgCachedImage
+                                HeightRequest="26"
+                                HorizontalOptions="Center"
+                                Source="resource://beyond.park.client.Resources.Images.ic_logo_blue.svg"
+                                TranslationY="0"
+                                VerticalOptions="Start" />
+                            <Label
+                                Grid.Column="1"
+                                FontSize="{OnPlatform Android={StaticResource MidMediumSize},
+                                                      iOS={StaticResource BaseFontSize}}"
+                                HorizontalOptions="Center"
+                                LineHeight="1.4"
+                                Text="Contactless and seamless parking in all of our carparks"
+                                TextColor="#0071BC"
+                                TranslationY="{OnPlatform iOS=-8,
+                                                          Android=0}" />
+                        </Grid>
+
+                        <Button
+                            Grid.Row="6"
+                            Margin="0,20,0,0"
+                            BackgroundColor="{StaticResource GrayColor}"
+                            Command="{Binding NextCommand}"
+                            Style="{StaticResource ButtonStyle}"
+                            Text="I want to continue"
+                            WidthRequest="210" />
+
+                        <Label
+                            Grid.Row="7"
+                            Margin="0,20,0,10"
+                            FontFamily="ModelicaBold"
+                            FontSize="{OnPlatform Android={StaticResource MidMediumSize},
+                                                  iOS={StaticResource BaseFontSize}}"
+                            HorizontalOptions="Center"
+                            LineHeight="1.56"
+                            Text="No thanks, I'll do this another time"
+                            TextColor="#6C6C6C" />
+                    </Grid>
+                    <!--  SECONDARY CONTENT  -->
+                    <Grid
+                        Margin="10,0"
+                        IsVisible="{Binding SecondaryContentShown}"
+                        RowDefinitions="auto,auto,auto"
+                        VerticalOptions="Start">
+
+                        <Label
+                            Margin="0,0,0,10"
+                            FontFamily="ModelicaExtraBold"
+                            FontSize="{OnPlatform Android={StaticResource MidMediumSize},
+                                                  iOS={StaticResource BaseFontSize}}"
+                            HorizontalOptions="Center"
+                            Text="Of course, not a problem"
+                            TextColor="{StaticResource BlueColor}"
+                            VerticalOptions="Center" />
+
+                        <Label
+                            Grid.Row="1"
+                            FontFamily="ModelicaMedium"
+                            FontSize="{OnPlatform Android={StaticResource MidMediumSize},
+                                                  iOS={StaticResource BaseFontSize}}"
+                            LineHeight="{OnPlatform iOS=1.56,
+                                                    Android=1.2}"
+                            Text="Whenever you're ready, I'll be here to help you!"
+                            TextColor="#565656" />
+
+                        <Button
+                            Grid.Row="2"
+                            Margin="0,20,0,10"
+                            BackgroundColor="{StaticResource GrayColor}"
+                            Command="{Binding NextCommand}"
+                            Style="{StaticResource ButtonStyle}"
+                            Text="OK"
+                            WidthRequest="210" />
+                    </Grid>
+                </Grid>
+            </yummy:PancakeView>
+
+            <!--  FACE ICON  -->
+            <ffimageloadingsvg:SvgCachedImage
+                HeightRequest="50"
+                HorizontalOptions="Center"
+                Rotation="-20"
+                ScaleX="-1"
+                Source="resource://beyond.park.client.Resources.Images.ic_face.svg"
+                TranslationY="-35"
+                VerticalOptions="Start" />
+
+            <!--  CLOSE BUTTON  -->
+            <Grid
+                CascadeInputTransparent="True"
+                HeightRequest="50"
+                HorizontalOptions="End"
+                TranslationX="0"
+                TranslationY="0"
+                VerticalOptions="Start"
+                WidthRequest="50">
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ClosePopupCommand}" NumberOfTapsRequired="1" />
+                </Grid.GestureRecognizers>
+
+                <Grid
+                    Padding="10"
+                    HorizontalOptions="End"
+                    VerticalOptions="Start">
+
+                    <ffimageloadingsvg:SvgCachedImage
+                        HeightRequest="14"
+                        HorizontalOptions="Center"
+                        Source="resource://beyond.park.client.Resources.Images.ic_close.svg"
+                        VerticalOptions="Start" />
+                </Grid>
+            </Grid>
+        </Grid>
+    </popups:SinglePopupViewBase.Content>
+
+</popups:SinglePopupViewBase>

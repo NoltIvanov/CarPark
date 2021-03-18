@@ -1,0 +1,1296 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<popups:SinglePopupViewBase
+    x:Class="beyond.park.client.Views.Popups.HelpSystemPopupView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:actionbars="clr-namespace:beyond.park.client.Views.ActionBars"
+    xmlns:controls="clr-namespace:beyond.park.client.Controls"
+    xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:googlemaps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
+    xmlns:popups="clr-namespace:beyond.park.client.Controls.Popups"
+    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    BackingColor="Transparent"
+    CascadeInputTransparent="False"
+    InputTransparent="True">
+
+    <popups:SinglePopupViewBase.Resources>
+        <OnPlatform x:Key="mainMargin" x:TypeArguments="Thickness">
+            <On Platform="iOS">
+                <OnIdiom
+                    x:TypeArguments="Thickness"
+                    Phone="0,60,0,0"
+                    Tablet="0,60,0,0" />
+            </On>
+            <On Platform="Android">
+                <OnIdiom
+                    x:TypeArguments="Thickness"
+                    Phone="0,40,0,0"
+                    Tablet="0,40,0,0" />
+            </On>
+        </OnPlatform>
+    </popups:SinglePopupViewBase.Resources>
+
+    <popups:SinglePopupViewBase.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <!--  ACTION BAR  -->
+            <actionbars:CommonActionBarView />
+            <!--  FILTER BLOCK  -->
+            <StackLayout
+                Grid.Row="1"
+                BackgroundColor="{StaticResource LightBlueColor}"
+                Spacing="17">
+                <!--  SEARCH  -->
+                <Grid Margin="0,17,0,0">
+                    <Grid Margin="20,0" VerticalOptions="Center">
+                        <Frame
+                            Padding="0"
+                            CornerRadius="20"
+                            HasShadow="False">
+                            <Grid>
+                                <ffimageloadingsvg:SvgCachedImage
+                                    Margin="14,0,0,0"
+                                    HeightRequest="16"
+                                    HorizontalOptions="Start"
+                                    Source="resource://beyond.park.client.Resources.Images.ic_search.svg"
+                                    TranslationY="0"
+                                    VerticalOptions="Center"
+                                    WidthRequest="14" />
+                                <controls:EntryExtended
+                                    ReturnCommand="{Binding SearchCommand}"
+                                    Style="{StaticResource SearchEntryStyle}"
+                                    Text="{Binding TargetValue}" />
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                </Grid>
+
+                <!--  FILTER  -->
+                <Grid Margin="0,0,0,17">
+                    <Grid Margin="20,0,0,0" VerticalOptions="Center">
+                        <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
+                            <StackLayout BindableLayout.ItemsSource="{Binding FilterItemViewModels}" Orientation="Horizontal">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid VerticalOptions="Center">
+                                            <controls:FilterView
+                                                Title="{Binding Title}"
+                                                CornerRadius="20"
+                                                HeightRequest="38"
+                                                IsSelected="{Binding IsSelected}"
+                                                SelectCommand="{Binding SelectedFilterCommand}"
+                                                VerticalOptions="Center" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </StackLayout>
+                        </ScrollView>
+                    </Grid>
+                </Grid>
+            </StackLayout>
+            <!--  MAP  -->
+            <Grid Grid.Row="2">
+                <googlemaps:Map
+                    HorizontalOptions="Fill"
+                    MyLocationEnabled="False"
+                    VerticalOptions="Fill" />
+            </Grid>
+            <!--  ROUTES BLOCK  -->
+            <Grid
+                Grid.Row="3"
+                BackgroundColor="#F3F3F3"
+                HeightRequest="300"
+                VerticalOptions="End">
+
+                <ffimageloadingsvg:SvgCachedImage
+                    Margin="0,10,0,0"
+                    HeightRequest="4"
+                    HorizontalOptions="Center"
+                    Source="resource://beyond.park.client.Resources.Images.ic_pop_line.svg"
+                    TranslationY="0"
+                    VerticalOptions="Start" />
+
+                <CollectionView
+                    Margin="0,30,0,0"
+                    ItemsSource="{Binding CarparkItemViewModels}"
+                    VerticalScrollBarVisibility="Never">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid HorizontalOptions="Center">
+                                <yummy:PancakeView
+                                    Margin="20,0,20,18"
+                                    BackgroundColor="{StaticResource WhiteColor}"
+                                    CornerRadius="{OnPlatform Android=5,
+                                                              iOS=5}"
+                                    HeightRequest="170"
+                                    Shadow="{yummy:ShadowMarkup BlurRadius=1,
+                                                                Color={StaticResource GrayColor},
+                                                                Offset='2,2'}">
+
+                                    <Grid Margin="0,14,0,0" ColumnDefinitions="60,*">
+                                        <!--  PIN  -->
+                                        <ffimageloadingsvg:SvgCachedImage
+                                            HeightRequest="22"
+                                            HorizontalOptions="Center"
+                                            Source="resource://beyond.park.client.Resources.Images.ic_pin_blue.svg"
+                                            TranslationY="0"
+                                            VerticalOptions="Start" />
+                                        <!--  INFO  -->
+                                        <StackLayout Grid.Column="1" Spacing="6">
+                                            <Label
+                                                FontFamily="ModelicaBold"
+                                                FontSize="{OnPlatform iOS={StaticResource BaseFontSize},
+                                                                      Android={StaticResource MidMediumSize}}"
+                                                Text="{Binding Name}"
+                                                TextColor="{StaticResource GrayColor}" />
+
+                                            <Label
+                                                FontFamily="ModelicaMedium"
+                                                FontSize="15"
+                                                LineHeight="1.2"
+                                                Text="{Binding Address}"
+                                                TextColor="{StaticResource GrayColor}" />
+
+                                            <StackLayout
+                                                HeightRequest="34"
+                                                Orientation="Horizontal"
+                                                Spacing="8">
+                                                <ContentView
+                                                    BackgroundColor="#EEEEEE"
+                                                    HeightRequest="27"
+                                                    HorizontalOptions="FillAndExpand"
+                                                    VerticalOptions="Center">
+                                                    <Label
+                                                        FontFamily="ModelicaMedium"
+                                                        FontSize="13"
+                                                        HorizontalOptions="Center"
+                                                        Text="{Binding Distance, StringFormat='{0} KM'}"
+                                                        TextColor="{StaticResource GrayColor}"
+                                                        VerticalOptions="Center" />
+                                                </ContentView>
+
+                                                <ContentView
+                                                    BackgroundColor="#EEEEEE"
+                                                    HeightRequest="27"
+                                                    HorizontalOptions="FillAndExpand"
+                                                    VerticalOptions="Center">
+                                                    <Label
+                                                        FontFamily="ModelicaMedium"
+                                                        FontSize="13"
+                                                        HorizontalOptions="Center"
+                                                        Text="{Binding Fee, StringFormat='from ${0} per hour'}"
+                                                        TextColor="{StaticResource GrayColor}"
+                                                        VerticalOptions="Center" />
+                                                </ContentView>
+
+                                                <ffimageloadingsvg:SvgCachedImage
+                                                    HeightRequest="34"
+                                                    HorizontalOptions="CenterAndExpand"
+                                                    Source="resource://beyond.park.client.Resources.Images.ic_route_blue.svg"
+                                                    TranslationY="0"
+                                                    VerticalOptions="Center" />
+                                            </StackLayout>
+
+                                            <Label
+                                                FontFamily="ModelicaMedium"
+                                                FontSize="{StaticResource MicroSize}"
+                                                LineHeight="1.2"
+                                                Text="More details..."
+                                                TextColor="#0C5588" />
+                                        </StackLayout>
+                                    </Grid>
+                                </yummy:PancakeView>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+
+            <!--  BACKGROUND  -->
+            <Grid
+                Grid.RowSpan="4"
+                BackgroundColor="{StaticResource BlackColor}"
+                Opacity="0.5" />
+
+            <!--  FIRST POPUP  -->
+            <Grid
+                Grid.RowSpan="4"
+                BackgroundColor="Transparent"
+                HorizontalOptions="Center"
+                IsVisible="{Binding FirstPopupShown}"
+                RowDefinitions="50,auto"
+                VerticalOptions="Center">
+                <!--  CONTENT  -->
+                <yummy:PancakeView
+                    Grid.Row="1"
+                    Margin="40,0"
+                    BackgroundColor="{StaticResource WhiteColor}"
+                    CornerRadius="{OnPlatform Android=5,
+                                              iOS=5}"
+                    Shadow="{yummy:ShadowMarkup BlurRadius=1,
+                                                Color={StaticResource GrayColor},
+                                                Offset='2,2'}"
+                    TranslationY="-25">
+
+                    <Grid RowDefinitions="auto,auto">
+                        <Label
+                            Grid.Row="0"
+                            Margin="16,30,16,16"
+                            FontFamily="ModelicaMedium"
+                            HorizontalOptions="Center"
+                            LineHeight="1.55"
+                            Text="{Binding CurrentHelpItem.Value.Title}"
+                            TextColor="#596F8E"
+                            VerticalOptions="Center" />
+                        <!--  NAVIGATION BUTTONS  -->
+                        <StackLayout
+                            Grid.Row="1"
+                            Margin="0,0,0,20"
+                            BackgroundColor="Transparent"
+                            Orientation="Horizontal">
+                            <Label
+                                FontFamily="ModelicaExtraBold"
+                                FontSize="{StaticResource MediumSize}"
+                                HorizontalOptions="CenterAndExpand"
+                                IsVisible="{Binding CurrentHelpItem.Previous, Converter={StaticResource NullableObjectToBoolConverter}}"
+                                Text="BACK"
+                                TextColor="{StaticResource GrayColor}"
+                                VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BackHelpCommand}" NumberOfTapsRequired="1" />
+                                </Label.GestureRecognizers>
+                            </Label>
+
+                            <Label
+                                FontFamily="ModelicaExtraBold"
+                                FontSize="{StaticResource MediumSize}"
+                                HorizontalOptions="CenterAndExpand"
+                                IsVisible="{Binding CurrentHelpItem.Next, Converter={StaticResource NullableObjectToBoolConverter}}"
+                                Text="NEXT"
+                                TextColor="{StaticResource OrangeColor}"
+                                VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding NextHelpCommand}" NumberOfTapsRequired="1" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+                    </Grid>
+                </yummy:PancakeView>
+                <!--  FACE ICON  -->
+                <yummy:PancakeView
+                    Grid.Row="1"
+                    BackgroundColor="{StaticResource WhiteColor}"
+                    CornerRadius="{OnPlatform Android=35,
+                                              iOS=30}"
+                    HeightRequest="65"
+                    HorizontalOptions="Center"
+                    Shadow="{yummy:ShadowMarkup BlurRadius=1,
+                                                Color={StaticResource GrayColor},
+                                                Offset='2,2'}"
+                    TranslationY="-55"
+                    VerticalOptions="Start"
+                    WidthRequest="65">
+                    <ffimageloadingsvg:SvgCachedImage
+                        HeightRequest="50"
+                        HorizontalOptions="Center"
+                        Source="resource://beyond.park.client.Resources.Images.ic_face.svg"
+                        TranslationY="0"
+                        VerticalOptions="Center" />
+                </yummy:PancakeView>
+                <!--  CLOSE BUTTON  -->
+                <Grid
+                    BackgroundColor="Transparent"
+                    CascadeInputTransparent="True"
+                    HeightRequest="50"
+                    HorizontalOptions="End"
+                    TranslationX="-20"
+                    TranslationY="0"
+                    VerticalOptions="Center"
+                    WidthRequest="50">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ClosePopupCommand}" NumberOfTapsRequired="1" />
+                    </Grid.GestureRecognizers>
+
+                    <yummy:PancakeView
+                        BackgroundColor="#3881B2"
+                        Border="{yummy:BorderMarkup Thickness=2,
+                                                    Color={StaticResource WhiteColor}}"
+                        CornerRadius="{OnPlatform Android=15,
+                                                  iOS=12}"
+                        HeightRequest="25"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="25">
+                        <Grid>
+                            <Line
+                                HorizontalOptions="Center"
+                                Stroke="White"
+                                StrokeThickness="2"
+                                VerticalOptions="Center"
+                                X1="0"
+                                X2="10"
+                                Y1="0"
+                                Y2="10" />
+
+                            <Line
+                                HorizontalOptions="Center"
+                                Stroke="White"
+                                StrokeThickness="2"
+                                VerticalOptions="Center"
+                                X1="10"
+                                X2="0"
+                                Y1="0"
+                                Y2="10" />
+                        </Grid>
+                    </yummy:PancakeView>
+                </Grid>
+            </Grid>
+            <!--  CLOSEST LOCATION POPUP  -->
+            <Grid
+                Grid.Row="3"
+                BackgroundColor="Transparent"
+                HeightRequest="300"
+                IsVisible="{Binding ClosestLocationPopupShown}"
+                VerticalOptions="End">
+                <CollectionView
+                    Margin="0,30,0,0"
+                    IsEnabled="False"
+                    ItemsSource="{Binding CarparkItemViewModels}"
+                    VerticalScrollBarVisibility="Never">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid HorizontalOptions="Center">
+                                <yummy:PancakeView
+                                    Margin="20,0,20,18"
+                                    BackgroundColor="{StaticResource WhiteColor}"
+                                    CornerRadius="{OnPlatform Android=5,
+                                                              iOS=5}"
+                                    HeightRequest="170"
+                                    Shadow="{yummy:ShadowMarkup BlurRadius=1,
+                                                                Color={StaticResource GrayColor},
+                                                                Offset='2,2'}">
+
+                                    <Grid Margin="0,14,0,0" ColumnDefinitions="60,*">
+                                        <!--  PIN  -->
+                                        <ffimageloadingsvg:SvgCachedImage
+                                            HeightRequest="22"
+                                            HorizontalOptions="Center"
+                                            Source="resource://beyond.park.client.Resources.Images.ic_pin_blue.svg"
+                                            TranslationY="0"
+                                            VerticalOptions="Start" />
+                                        <!--  INFO  -->
+                                        <StackLayout Grid.Column="1" Spacing="6">
+                                            <Label
+                                                FontFamily="ModelicaBold"
+                                                FontSize="{OnPlatform iOS={StaticResource BaseFontSize},
+                                                                      Android={StaticResource MidMediumSize}}"
+                                                Text="{Binding Name}"
+                                                TextColor="{StaticResource GrayColor}" />
+
+                                            <Label
+                                                FontFamily="ModelicaMedium"
+                                                FontSize="15"
+                                                LineHeight="1.2"
+                                                Text="{Binding Address}"
+                                                TextColor="{StaticResource GrayColor}" />
+
+                                            <StackLayout
+                                                HeightRequest="34"
+                                                Orientation="Horizontal"
+                                                Spacing="8">
+                                                <ContentView
+                                                    BackgroundColor="#EEEEEE"
+                                                    HeightRequest="27"
+                                                    HorizontalOptions="FillAndExpand"
+                                                    VerticalOptions="Center">
+                                                    <Label
+                                                        FontFamily="ModelicaMedium"
+                                                        FontSize="13"
+                                                        HorizontalOptions="Center"
+                                                        Text="{Binding Distance, StringFormat='{0} KM'}"
+                                                        TextColor="{StaticResource GrayColor}"
+                                                        VerticalOptions="Center" />
+                                                </ContentView>
+
+                                                <ContentView
+                                                    BackgroundColor="#EEEEEE"
+                                                    HeightRequest="27"
+                                                    HorizontalOptions="FillAndExpand"
+                                                    VerticalOptions="Center">
+                                                    <Label
+                                                        FontFamily="ModelicaMedium"
+                                                        FontSize="13"
+                                                        HorizontalOptions="Center"
+                                                        Text="{Binding Fee, StringFormat='from ${0} per hour'}"
+                                                        TextColor="{StaticResource GrayColor}"
+                                                        VerticalOptions="Center" />
+                                                </ContentView>
+
+                                                <ffimageloadingsvg:SvgCachedImage
+                                                    HeightRequest="34"
+                                                    HorizontalOptions="CenterAndExpand"
+                                                    Source="resource://beyond.park.client.Resources.Images.ic_route_blue.svg"
+                                                    TranslationY="0"
+                                                    VerticalOptions="Center" />
+                                            </StackLayout>
+
+                                            <Label
+                                                FontFamily="ModelicaMedium"
+                                                FontSize="{StaticResource MicroSize}"
+                                                LineHeight="1.2"
+                                                Text="More details..."
+                                                TextColor="#0C5588" />
+                                        </StackLayout>
+                                    </Grid>
+                                </yummy:PancakeView>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+            <!--  CLOSEST LOCATION POPUP PARTIAL  -->
+            <Grid
+                Grid.Row="3"
+                BackgroundColor="Transparent"
+                HorizontalOptions="Center"
+                IsVisible="{Binding ClosestLocationPopupShown}"
+                RowDefinitions="50,auto"
+                TranslationY="{OnPlatform Android=-220,
+                                          iOS=-190}"
+                VerticalOptions="Start">
+                <!--  CONTENT  -->
+                <yummy:PancakeView
+                    Grid.Row="1"
+                    Margin="40,0"
+                    BackgroundColor="{StaticResource WhiteColor}"
+                    CornerRadius="{OnPlatform Android=5,
+                                              iOS=5}"
+                    Shadow="{yummy:ShadowMarkup BlurRadius=1,
+                                                Color={StaticResource GrayColor},
+                                                Offset='2,2'}"
+                    TranslationY="-25">
+
+                    <Grid RowDefinitions="auto,auto">
+                        <Label
+                            Grid.Row="0"
+                            Margin="16,30,16,16"
+                            FontFamily="ModelicaMedium"
+                            HorizontalOptions="Center"
+                            LineHeight="1.55"
+                            Text="{Binding CurrentHelpItem.Value.Title}"
+                            TextColor="#596F8E"
+                            VerticalOptions="Center" />
+                        <!--  NAVIGATION BUTTONS  -->
+                        <StackLayout
+                            Grid.Row="1"
+                            Margin="0,0,0,20"
+                            BackgroundColor="Transparent"
+                            Orientation="Horizontal">
+                            <Label
+                                FontFamily="ModelicaExtraBold"
+                                FontSize="{StaticResource MediumSize}"
+                                HorizontalOptions="CenterAndExpand"
+                                IsVisible="{Binding CurrentHelpItem.Previous, Converter={StaticResource NullableObjectToBoolConverter}}"
+                                Text="BACK"
+                                TextColor="{StaticResource GrayColor}"
+                                VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BackHelpCommand}" NumberOfTapsRequired="1" />
+                                </Label.GestureRecognizers>
+                            </Label>
+
+                            <Label
+                                FontFamily="ModelicaExtraBold"
+                                FontSize="{StaticResource MediumSize}"
+                                HorizontalOptions="CenterAndExpand"
+                                IsVisible="{Binding CurrentHelpItem.Next, Converter={StaticResource NullableObjectToBoolConverter}}"
+                                Text="NEXT"
+                                TextColor="{StaticResource OrangeColor}"
+                                VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding NextHelpCommand}" NumberOfTapsRequired="1" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+                    </Grid>
+                </yummy:PancakeView>
+                <!--  FACE ICON  -->
+                <yummy:PancakeView
+                    Grid.Row="1"
+                    BackgroundColor="{StaticResource WhiteColor}"
+                    CornerRadius="{OnPlatform Android=35,
+                                              iOS=30}"
+                    HeightRequest="65"
+                    HorizontalOptions="Center"
+                    Shadow="{yummy:ShadowMarkup BlurRadius=1,
+                                                Color={StaticResource GrayColor},
+                                                Offset='2,2'}"
+                    TranslationY="-55"
+                    VerticalOptions="Start"
+                    WidthRequest="65">
+                    <ffimageloadingsvg:SvgCachedImage
+                        HeightRequest="50"
+                        HorizontalOptions="Center"
+                        Source="resource://beyond.park.client.Resources.Images.ic_face.svg"
+                        TranslationY="0"
+                        VerticalOptions="Center" />
+                </yummy:PancakeView>
+                <!--  ARROW BOTTOM  -->
+                <ffimageloadingsvg:SvgCachedImage
+                    Grid.Row="1"
+                    HeightRequest="32"
+                    HorizontalOptions="Center"
+                    Source="resource://beyond.park.client.Resources.Images.ic_arrow_orange.svg"
+                    TranslationY="5"
+                    VerticalOptions="End" />
+                <!--  CLOSE BUTTON  -->
+                <Grid
+                    BackgroundColor="Transparent"
+                    CascadeInputTransparent="True"
+                    HeightRequest="50"
+                    HorizontalOptions="End"
+                    TranslationX="-20"
+                    TranslationY="0"
+                    VerticalOptions="Center"
+                    WidthRequest="50">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ClosePopupCommand}" NumberOfTapsRequired="1" />
+                    </Grid.GestureRecognizers>
+
+                    <yummy:PancakeView
+                        BackgroundColor="#3881B2"
+                        Border="{yummy:BorderMarkup Thickness=2,
+                                                    Color={StaticResource WhiteColor}}"
+                        CornerRadius="{OnPlatform Android=15,
+                                                  iOS=12}"
+                        HeightRequest="25"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="25">
+                        <Grid>
+                            <Line
+                                HorizontalOptions="Center"
+                                Stroke="White"
+                                StrokeThickness="2"
+                                VerticalOptions="Center"
+                                X1="0"
+                                X2="10"
+                                Y1="0"
+                                Y2="10" />
+
+                            <Line
+                                HorizontalOptions="Center"
+                                Stroke="White"
+                                StrokeThickness="2"
+                                VerticalOptions="Center"
+                                X1="10"
+                                X2="0"
+                                Y1="0"
+                                Y2="10" />
+                        </Grid>
+                    </yummy:PancakeView>
+                </Grid>
+            </Grid>
+            <!--  FILTER POPUP  -->
+            <Grid
+                Grid.Row="1"
+                Grid.RowSpan="3"
+                BackgroundColor="Transparent"
+                IsVisible="{Binding FilterPopupShown}"
+                RowDefinitions="auto,auto">
+                <StackLayout BackgroundColor="Transparent" Spacing="17">
+                    <!--  SEARCH  -->
+                    <Grid Margin="0,17,0,0">
+                        <Grid Margin="20,0" VerticalOptions="Center">
+                            <Frame
+                                Padding="0"
+                                BackgroundColor="Transparent"
+                                CornerRadius="20"
+                                HasShadow="False">
+                                <Grid>
+                                    <controls:EntryExtended
+                                        IsEnabled="False"
+                                        Style="{StaticResource SearchEntryStyle}"
+                                        Text="{Binding TargetValue}" />
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                    </Grid>
+
+                    <!--  FILTER  -->
+                    <Grid Margin="0,0,0,17" IsEnabled="False">
+                        <Grid Margin="20,0,0,0" VerticalOptions="Center">
+                            <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal">
+                                <StackLayout BindableLayout.ItemsSource="{Binding FilterItemViewModels}" Orientation="Horizontal">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid VerticalOptions="Center">
+                                                <controls:FilterView
+                                                    Title="{Binding Title}"
+                                                    CornerRadius="20"
+                                                    HeightRequest="38"
+                                                    IsSelected="{Binding IsSelected}"
+                                                    SelectCommand="{Binding SelectedFilterCommand}"
+                                                    VerticalOptions="Center" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </StackLayout>
+                            </ScrollView>
+                        </Grid>
+                    </Grid>
+                </StackLayout>
+                <!--  TIP  -->
+                <Grid
+                    Grid.Row="1"
+                    BackgroundColor="Transparent"
+                    HorizontalOptions="Center"
+                    IsVisible="{Binding FilterPopupShown}"
+                    RowDefinitions="50,auto"
+                    TranslationY="-10"
+                    VerticalOptions="Center">
+                    <!--  CONTENT  -->
+                    <yummy:PancakeView
+                        Grid.Row="1"
+                        Margin="40,0"
+                        BackgroundColor="{StaticResource WhiteColor}"
+                        CornerRadius="{OnPlatform Android=5,
+                                                  iOS=5}"
+                        Shadow="{yummy:ShadowMarkup BlurRadius=1,
+                                                    Color={StaticResource GrayColor},
+                                                    Offset='2,2'}"
+                        TranslationY="-25">
+
+                        <Grid RowDefinitions="auto,auto">
+                            <Label
+                                Grid.Row="0"
+                                Margin="16,30,16,16"
+                                FontFamily="ModelicaMedium"
+                                HorizontalOptions="Center"
+                                LineHeight="1.55"
+                                Text="{Binding CurrentHelpItem.Value.Title}"
+                                TextColor="#596F8E"
+                                VerticalOptions="Center" />
+                            <!--  NAVIGATION BUTTONS  -->
+                            <StackLayout
+                                Grid.Row="1"
+                                Margin="0,0,0,20"
+                                BackgroundColor="Transparent"
+                                Orientation="Horizontal">
+                                <Label
+                                    FontFamily="ModelicaExtraBold"
+                                    FontSize="{StaticResource MediumSize}"
+                                    HorizontalOptions="CenterAndExpand"
+                                    IsVisible="{Binding CurrentHelpItem.Previous, Converter={StaticResource NullableObjectToBoolConverter}}"
+                                    Text="BACK"
+                                    TextColor="{StaticResource GrayColor}"
+                                    VerticalOptions="Center">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding BackHelpCommand}" NumberOfTapsRequired="1" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+                                <Label
+                                    FontFamily="ModelicaExtraBold"
+                                    FontSize="{StaticResource MediumSize}"
+                                    HorizontalOptions="CenterAndExpand"
+                                    IsVisible="{Binding CurrentHelpItem.Next, Converter={StaticResource NullableObjectToBoolConverter}}"
+                                    Text="NEXT"
+                                    TextColor="{StaticResource OrangeColor}"
+                                    VerticalOptions="Center">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding NextHelpCommand}" NumberOfTapsRequired="1" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </StackLayout>
+                        </Grid>
+                    </yummy:PancakeView>
+                    <!--  FACE ICON  -->
+                    <yummy:PancakeView
+                        Grid.Row="1"
+                        BackgroundColor="{StaticResource WhiteColor}"
+                        CornerRadius="{OnPlatform Android=35,
+                                                  iOS=30}"
+                        HeightRequest="65"
+                        HorizontalOptions="Center"
+                        Shadow="{yummy:ShadowMarkup BlurRadius=1,
+                                                    Color={StaticResource GrayColor},
+                                                    Offset='2,2'}"
+                        TranslationY="-55"
+                        VerticalOptions="Start"
+                        WidthRequest="65">
+                        <ffimageloadingsvg:SvgCachedImage
+                            HeightRequest="50"
+                            HorizontalOptions="Center"
+                            Source="resource://beyond.park.client.Resources.Images.ic_face.svg"
+                            TranslationY="0"
+                            VerticalOptions="Center" />
+                    </yummy:PancakeView>
+                    <!--  ARROW BOTTOM  -->
+                    <ffimageloadingsvg:SvgCachedImage
+                        Grid.Row="0"
+                        HeightRequest="32"
+                        HorizontalOptions="Start"
+                        RotationX="180"
+                        Source="resource://beyond.park.client.Resources.Images.ic_arrow_orange.svg"
+                        TranslationX="55"
+                        TranslationY="-22"
+                        VerticalOptions="End" />
+                    <!--  CLOSE BUTTON  -->
+                    <Grid
+                        BackgroundColor="Transparent"
+                        CascadeInputTransparent="True"
+                        HeightRequest="50"
+                        HorizontalOptions="End"
+                        TranslationX="-20"
+                        TranslationY="0"
+                        VerticalOptions="Center"
+                        WidthRequest="50">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ClosePopupCommand}" NumberOfTapsRequired="1" />
+                        </Grid.GestureRecognizers>
+
+                        <yummy:PancakeView
+                            BackgroundColor="#3881B2"
+                            Border="{yummy:BorderMarkup Thickness=2,
+                                                        Color={StaticResource WhiteColor}}"
+                            CornerRadius="{OnPlatform Android=15,
+                                                      iOS=12}"
+                            HeightRequest="25"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            WidthRequest="25">
+                            <Grid>
+                                <Line
+                                    HorizontalOptions="Center"
+                                    Stroke="White"
+                                    StrokeThickness="2"
+                                    VerticalOptions="Center"
+                                    X1="0"
+                                    X2="10"
+                                    Y1="0"
+                                    Y2="10" />
+
+                                <Line
+                                    HorizontalOptions="Center"
+                                    Stroke="White"
+                                    StrokeThickness="2"
+                                    VerticalOptions="Center"
+                                    X1="10"
+                                    X2="0"
+                                    Y1="0"
+                                    Y2="10" />
+                            </Grid>
+                        </yummy:PancakeView>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <!--  REROUTE POPUP  -->
+            <Grid
+                Grid.Row="3"
+                BackgroundColor="Transparent"
+                HeightRequest="300"
+                IsVisible="{Binding ReroutePopupShown}"
+                VerticalOptions="End">
+                <CollectionView
+                    Margin="0,30,0,0"
+                    IsEnabled="False"
+                    ItemsSource="{Binding CarparkItemViewModelsCopy}"
+                    VerticalScrollBarVisibility="Never">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid HorizontalOptions="Center">
+                                <yummy:PancakeView
+                                    Margin="20,0,20,18"
+                                    BackgroundColor="{StaticResource WhiteColor}"
+                                    CornerRadius="{OnPlatform Android=5,
+                                                              iOS=5}"
+                                    HeightRequest="170"
+                                    Shadow="{yummy:ShadowMarkup BlurRadius=1,
+                                                                Color={StaticResource GrayColor},
+                                                                Offset='2,2'}">
+
+                                    <Grid Margin="0,14,0,0" ColumnDefinitions="60,*">
+                                        <!--  PIN  -->
+                                        <ffimageloadingsvg:SvgCachedImage
+                                            HeightRequest="22"
+                                            HorizontalOptions="Center"
+                                            Source="resource://beyond.park.client.Resources.Images.ic_pin_blue.svg"
+                                            TranslationY="0"
+                                            VerticalOptions="Start" />
+                                        <!--  INFO  -->
+                                        <StackLayout Grid.Column="1" Spacing="6">
+                                            <Label
+                                                FontFamily="ModelicaBold"
+                                                FontSize="{OnPlatform iOS={StaticResource BaseFontSize},
+                                                                      Android={StaticResource MidMediumSize}}"
+                                                Text="{Binding Name}"
+                                                TextColor="{StaticResource GrayColor}" />
+
+                                            <Label
+                                                FontFamily="ModelicaMedium"
+                                                FontSize="15"
+                                                LineHeight="1.2"
+                                                Text="{Binding Address}"
+                                                TextColor="{StaticResource GrayColor}" />
+
+                                            <StackLayout
+                                                HeightRequest="34"
+                                                Orientation="Horizontal"
+                                                Spacing="8">
+                                                <ContentView
+                                                    BackgroundColor="#EEEEEE"
+                                                    HeightRequest="27"
+                                                    HorizontalOptions="FillAndExpand"
+                                                    VerticalOptions="Center">
+                                                    <Label
+                                                        FontFamily="ModelicaMedium"
+                                                        FontSize="13"
+                                                        HorizontalOptions="Center"
+                                                        Text="{Binding Distance, StringFormat='{0} KM'}"
+                                                        TextColor="{StaticResource GrayColor}"
+                                                        VerticalOptions="Center" />
+                                                </ContentView>
+
+                                                <ContentView
+                                                    BackgroundColor="#EEEEEE"
+                                                    HeightRequest="27"
+                                                    HorizontalOptions="FillAndExpand"
+                                                    VerticalOptions="Center">
+                                                    <Label
+                                                        FontFamily="ModelicaMedium"
+                                                        FontSize="13"
+                                                        HorizontalOptions="Center"
+                                                        Text="{Binding Fee, StringFormat='from ${0} per hour'}"
+                                                        TextColor="{StaticResource GrayColor}"
+                                                        VerticalOptions="Center" />
+                                                </ContentView>
+
+                                                <ffimageloadingsvg:SvgCachedImage
+                                                    HeightRequest="34"
+                                                    HorizontalOptions="CenterAndExpand"
+                                                    Source="resource://beyond.park.client.Resources.Images.ic_route_blue.svg"
+                                                    TranslationY="0"
+                                                    VerticalOptions="Center" />
+                                            </StackLayout>
+
+                                            <Label
+                                                FontFamily="ModelicaMedium"
+                                                FontSize="{StaticResource MicroSize}"
+                                                LineHeight="1.2"
+                                                Text="More details..."
+                                                TextColor="#0C5588" />
+                                        </StackLayout>
+                                    </Grid>
+                                </yummy:PancakeView>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+            <!--  REROUTE POPUP PARTIAL  -->
+            <Grid
+                Grid.Row="3"
+                BackgroundColor="Transparent"
+                HorizontalOptions="Center"
+                IsVisible="{Binding ReroutePopupShown}"
+                RowDefinitions="50,auto"
+                TranslationY="{OnPlatform Android=-270,
+                                          iOS=-210}"
+                VerticalOptions="Start">
+                <!--  CONTENT  -->
+                <yummy:PancakeView
+                    Grid.Row="1"
+                    Margin="40,0"
+                    BackgroundColor="{StaticResource WhiteColor}"
+                    CornerRadius="{OnPlatform Android=5,
+                                              iOS=5}"
+                    Shadow="{yummy:ShadowMarkup BlurRadius=1,
+                                                Color={StaticResource GrayColor},
+                                                Offset='2,2'}"
+                    TranslationY="-25">
+
+                    <Grid RowDefinitions="auto,auto">
+                        <Label
+                            Grid.Row="0"
+                            Margin="16,30,16,16"
+                            FontFamily="ModelicaMedium"
+                            HorizontalOptions="Center"
+                            LineHeight="1.55"
+                            Text="{Binding CurrentHelpItem.Value.Title}"
+                            TextColor="#596F8E"
+                            VerticalOptions="Center" />
+                        <!--  NAVIGATION BUTTONS  -->
+                        <StackLayout
+                            Grid.Row="1"
+                            Margin="0,0,0,20"
+                            BackgroundColor="Transparent"
+                            Orientation="Horizontal">
+                            <Label
+                                FontFamily="ModelicaExtraBold"
+                                FontSize="{StaticResource MediumSize}"
+                                HorizontalOptions="CenterAndExpand"
+                                IsVisible="{Binding CurrentHelpItem.Previous, Converter={StaticResource NullableObjectToBoolConverter}}"
+                                Text="BACK"
+                                TextColor="{StaticResource GrayColor}"
+                                VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BackHelpCommand}" NumberOfTapsRequired="1" />
+                                </Label.GestureRecognizers>
+                            </Label>
+
+                            <Label
+                                FontFamily="ModelicaExtraBold"
+                                FontSize="{StaticResource MediumSize}"
+                                HorizontalOptions="CenterAndExpand"
+                                IsVisible="{Binding CurrentHelpItem.Next, Converter={StaticResource NullableObjectToBoolConverter}}"
+                                Text="NEXT"
+                                TextColor="{StaticResource OrangeColor}"
+                                VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding NextHelpCommand}" NumberOfTapsRequired="1" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+                    </Grid>
+                </yummy:PancakeView>
+                <!--  FACE ICON  -->
+                <yummy:PancakeView
+                    Grid.Row="1"
+                    BackgroundColor="{StaticResource WhiteColor}"
+                    CornerRadius="{OnPlatform Android=35,
+                                              iOS=30}"
+                    HeightRequest="65"
+                    HorizontalOptions="Center"
+                    Shadow="{yummy:ShadowMarkup BlurRadius=1,
+                                                Color={StaticResource GrayColor},
+                                                Offset='2,2'}"
+                    TranslationY="-55"
+                    VerticalOptions="Start"
+                    WidthRequest="65">
+                    <ffimageloadingsvg:SvgCachedImage
+                        HeightRequest="50"
+                        HorizontalOptions="Center"
+                        Source="resource://beyond.park.client.Resources.Images.ic_face.svg"
+                        TranslationY="0"
+                        VerticalOptions="Center" />
+                </yummy:PancakeView>
+                <!--  ARROW BOTTOM  -->
+                <ffimageloadingsvg:SvgCachedImage
+                    Grid.Row="1"
+                    HeightRequest="32"
+                    HorizontalOptions="Center"
+                    Source="resource://beyond.park.client.Resources.Images.ic_arrow_orange.svg"
+                    TranslationY="5"
+                    VerticalOptions="End" />
+                <!--  CLOSE BUTTON  -->
+                <Grid
+                    BackgroundColor="Transparent"
+                    CascadeInputTransparent="True"
+                    HeightRequest="50"
+                    HorizontalOptions="End"
+                    TranslationX="-20"
+                    TranslationY="0"
+                    VerticalOptions="Center"
+                    WidthRequest="50">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ClosePopupCommand}" NumberOfTapsRequired="1" />
+                    </Grid.GestureRecognizers>
+
+                    <yummy:PancakeView
+                        BackgroundColor="#3881B2"
+                        Border="{yummy:BorderMarkup Thickness=2,
+                                                    Color={StaticResource WhiteColor}}"
+                        CornerRadius="{OnPlatform Android=15,
+                                                  iOS=12}"
+                        HeightRequest="25"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="25">
+                        <Grid>
+                            <Line
+                                HorizontalOptions="Center"
+                                Stroke="White"
+                                StrokeThickness="2"
+                                VerticalOptions="Center"
+                                X1="0"
+                                X2="10"
+                                Y1="0"
+                                Y2="10" />
+
+                            <Line
+                                HorizontalOptions="Center"
+                                Stroke="White"
+                                StrokeThickness="2"
+                                VerticalOptions="Center"
+                                X1="10"
+                                X2="0"
+                                Y1="0"
+                                Y2="10" />
+                        </Grid>
+                    </yummy:PancakeView>
+                </Grid>
+            </Grid>
+            <!--  MAP PIN POPUP  -->
+            <Grid
+                Grid.Row="2"
+                Grid.RowSpan="2"
+                BackgroundColor="Transparent"
+                HorizontalOptions="Center"
+                IsVisible="{Binding MapPinPopupShown}"
+                RowDefinitions="50,auto"
+                VerticalOptions="Start">
+                <!--  CONTENT  -->
+                <yummy:PancakeView
+                    Grid.Row="1"
+                    Margin="60,0"
+                    BackgroundColor="{StaticResource WhiteColor}"
+                    CornerRadius="{OnPlatform Android=5,
+                                              iOS=5}"
+                    Shadow="{yummy:ShadowMarkup BlurRadius=1,
+                                                Color={StaticResource GrayColor},
+                                                Offset='2,2'}"
+                    TranslationY="-25">
+
+                    <Grid RowDefinitions="auto,auto">
+                        <Label
+                            Grid.Row="0"
+                            Margin="16,30,16,16"
+                            FontFamily="ModelicaMedium"
+                            HorizontalOptions="Center"
+                            LineHeight="1.55"
+                            Text="{Binding CurrentHelpItem.Value.Title}"
+                            TextColor="#596F8E"
+                            VerticalOptions="Center" />
+                        <!--  NAVIGATION BUTTONS  -->
+                        <StackLayout
+                            Grid.Row="1"
+                            Margin="0,0,0,20"
+                            BackgroundColor="Transparent"
+                            Orientation="Horizontal">
+                            <Label
+                                FontFamily="ModelicaExtraBold"
+                                FontSize="{StaticResource MediumSize}"
+                                HorizontalOptions="CenterAndExpand"
+                                IsVisible="{Binding CurrentHelpItem.Previous, Converter={StaticResource NullableObjectToBoolConverter}}"
+                                Text="BACK"
+                                TextColor="{StaticResource GrayColor}"
+                                VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BackHelpCommand}" NumberOfTapsRequired="1" />
+                                </Label.GestureRecognizers>
+                            </Label>
+
+                            <Label
+                                FontFamily="ModelicaExtraBold"
+                                FontSize="{StaticResource MediumSize}"
+                                HorizontalOptions="CenterAndExpand"
+                                IsVisible="{Binding CurrentHelpItem.Next, Converter={StaticResource NullableObjectToBoolConverter}}"
+                                Text="NEXT"
+                                TextColor="{StaticResource OrangeColor}"
+                                VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding NextHelpCommand}" NumberOfTapsRequired="1" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+                    </Grid>
+                </yummy:PancakeView>
+                <!--  FACE ICON  -->
+                <yummy:PancakeView
+                    Grid.Row="1"
+                    BackgroundColor="{StaticResource WhiteColor}"
+                    CornerRadius="{OnPlatform Android=35,
+                                              iOS=30}"
+                    HeightRequest="65"
+                    HorizontalOptions="Center"
+                    Shadow="{yummy:ShadowMarkup BlurRadius=1,
+                                                Color={StaticResource GrayColor},
+                                                Offset='2,2'}"
+                    TranslationY="-55"
+                    VerticalOptions="Start"
+                    WidthRequest="65">
+                    <ffimageloadingsvg:SvgCachedImage
+                        HeightRequest="50"
+                        HorizontalOptions="Center"
+                        Source="resource://beyond.park.client.Resources.Images.ic_face.svg"
+                        TranslationY="0"
+                        VerticalOptions="Center" />
+                </yummy:PancakeView>
+
+                <StackLayout
+                    Grid.Row="1"
+                    BackgroundColor="Transparent"
+                    HorizontalOptions="Start"
+                    Orientation="Horizontal"
+                    Spacing="0"
+                    TranslationX="-10"
+                    VerticalOptions="Start">
+                    <Grid
+                        BackgroundColor="Transparent"
+                        HeightRequest="40"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="40">
+                        <!--  BACK  -->
+                        <ffimageloadingsvg:SvgCachedImage
+                            HeightRequest="40"
+                            HorizontalOptions="Center"
+                            Source="resource://beyond.park.client.Resources.Images.ic_pin_back.png"
+                            TranslationX="0"
+                            TranslationY="0"
+                            VerticalOptions="Center" />
+                        <!--  PIN  -->
+                        <ffimageloadingsvg:SvgCachedImage
+                            HeightRequest="18"
+                            HorizontalOptions="Center"
+                            Source="resource://beyond.park.client.Resources.Images.ic_pin_blue.svg"
+                            TranslationX="0"
+                            TranslationY="0"
+                            VerticalOptions="Center" />
+                    </Grid>
+                    <!--  ARROW BOTTOM  -->
+                    <ffimageloadingsvg:SvgCachedImage
+                        HeightRequest="32"
+                        HorizontalOptions="Center"
+                        Rotation="90"
+                        Source="resource://beyond.park.client.Resources.Images.ic_arrow_orange.svg"
+                        TranslationX="0"
+                        TranslationY="0"
+                        VerticalOptions="Center" />
+                </StackLayout>
+                <!--  CLOSE BUTTON  -->
+                <Grid
+                    BackgroundColor="Transparent"
+                    CascadeInputTransparent="True"
+                    HeightRequest="50"
+                    HorizontalOptions="End"
+                    TranslationX="-35"
+                    TranslationY="0"
+                    VerticalOptions="Center"
+                    WidthRequest="50">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ClosePopupCommand}" NumberOfTapsRequired="1" />
+                    </Grid.GestureRecognizers>
+
+                    <yummy:PancakeView
+                        BackgroundColor="#3881B2"
+                        Border="{yummy:BorderMarkup Thickness=2,
+                                                    Color={StaticResource WhiteColor}}"
+                        CornerRadius="{OnPlatform Android=15,
+                                                  iOS=12}"
+                        HeightRequest="25"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="25">
+                        <Grid>
+                            <Line
+                                HorizontalOptions="Center"
+                                Stroke="White"
+                                StrokeThickness="2"
+                                VerticalOptions="Center"
+                                X1="0"
+                                X2="10"
+                                Y1="0"
+                                Y2="10" />
+
+                            <Line
+                                HorizontalOptions="Center"
+                                Stroke="White"
+                                StrokeThickness="2"
+                                VerticalOptions="Center"
+                                X1="10"
+                                X2="0"
+                                Y1="0"
+                                Y2="10" />
+                        </Grid>
+                    </yummy:PancakeView>
+                </Grid>
+            </Grid>
+            <!--  MORE TIPS POPUP  -->
+            <Grid
+                Grid.Row="1"
+                Grid.RowSpan="3"
+                BackgroundColor="Transparent"
+                HorizontalOptions="Center"
+                IsVisible="{Binding MoreTipsPopupShown}"
+                RowDefinitions="50,auto"
+                TranslationX="15"
+                TranslationY="-55"
+                VerticalOptions="Start">
+                <!--  CONTENT  -->
+                <yummy:PancakeView
+                    Grid.Row="1"
+                    Margin="40,0"
+                    BackgroundColor="{StaticResource WhiteColor}"
+                    CornerRadius="{OnPlatform Android=5,
+                                              iOS=5}"
+                    Shadow="{yummy:ShadowMarkup BlurRadius=1,
+                                                Color={StaticResource GrayColor},
+                                                Offset='2,2'}"
+                    TranslationY="-25">
+
+                    <Grid RowDefinitions="auto,auto">
+                        <Label
+                            Grid.Row="0"
+                            Margin="16,30,16,16"
+                            FontFamily="ModelicaMedium"
+                            HorizontalOptions="Center"
+                            LineHeight="1.55"
+                            Text="{Binding CurrentHelpItem.Value.Title}"
+                            TextColor="#596F8E"
+                            VerticalOptions="Center" />
+                        <!--  NAVIGATION BUTTONS  -->
+                        <StackLayout
+                            Grid.Row="1"
+                            Margin="0,0,0,20"
+                            BackgroundColor="Transparent"
+                            Orientation="Horizontal">
+                            <Label
+                                FontFamily="ModelicaExtraBold"
+                                FontSize="{StaticResource MediumSize}"
+                                HorizontalOptions="CenterAndExpand"
+                                Text="OK"
+                                TextColor="{StaticResource GrayColor}"
+                                VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ClosePopupCommand}" NumberOfTapsRequired="1" />
+                                </Label.GestureRecognizers>
+                            </Label>
+
+                        </StackLayout>
+                    </Grid>
+                </yummy:PancakeView>
+                <!--  FACE ICON  -->
+                <yummy:PancakeView
+                    Grid.Row="1"
+                    BackgroundColor="{StaticResource WhiteColor}"
+                    CornerRadius="{OnPlatform Android=35,
+                                              iOS=30}"
+                    HeightRequest="65"
+                    HorizontalOptions="End"
+                    Scale="0.75"
+                    Shadow="{yummy:ShadowMarkup BlurRadius=1,
+                                                Color={StaticResource GrayColor},
+                                                Offset='2,2'}"
+                    TranslationX="-10"
+                    TranslationY="-55"
+                    VerticalOptions="Start"
+                    WidthRequest="65">
+                    <ffimageloadingsvg:SvgCachedImage
+                        HeightRequest="50"
+                        HorizontalOptions="Center"
+                        Source="resource://beyond.park.client.Resources.Images.ic_face.svg"
+                        TranslationY="0"
+                        VerticalOptions="Center" />
+                </yummy:PancakeView>
+
+            </Grid>
+        </Grid>
+    </popups:SinglePopupViewBase.Content>
+</popups:SinglePopupViewBase>
